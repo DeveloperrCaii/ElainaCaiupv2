@@ -11,12 +11,5 @@
       "src": "/(.*)",
       "dest": "server.js"
     }
-  ],
-  "env": {
-    "GEMINI_API_KEYS": "@gemini_api_keys",
-    "MONGODB_URI": "@mongodb_uri",
-    "DEVELOPER_USERNAME": "@developer_username",
-    "DEVELOPER_PASSWORD": "@developer_password",
-    "TTS_API_KEY": "@tts_api_key"
-  }
+  ]
 }

@@ -506,7 +506,140 @@ async function generateVoiceNote(text, voiceType = 'female') {
   }
 }
 
-// Multimedia chat endpoint
+// Chat endpoint - DIPERBAIKI DENGAN HISTORY LENGKAP
+app.post('/api/chat', requireAuth, async (req, res) => {
+  const { message } = req.body;
+  const user = req.user;
+  
+  if (!message || message.trim() === '') {
+    return res.status(400).json({ error: "Pesan tidak boleh kosong" });
+  }
+
+  let keyTried = [];
+  const currentPrompt = user.isDeveloper ? DEVELOPER_PROMPT : USER_PROMPT;
+  
+  try {
+    // Ambil SEMUA riwayat chat dari database (unlimited untuk konteks penuh)
+    // Tapi batasi maksimal 50 pesan terbaru agar tidak terlalu panjang
+    let chatHistory = [];
+    if (db) {
+      chatHistory = await db.collection('chats')
+        .find({ userId: user.userId })
+        .sort({ createdAt: -1 })
+        .limit(50) // Ambil 50 pesan terbaru untuk konteks yang cukup
+        .toArray();
+      
+      // Balik urutan agar dari yang terlama ke terbaru
+      chatHistory = chatHistory.reverse();
+      
+      console.log(`📚 Mengambil ${chatHistory.length} riwayat chat untuk ${user.username}`);
+    }
+    
+    // Bangun contents array dengan riwayat chat LENGKAP
+    const contents = [];
+    
+    // 1. System prompt sebagai pesan pertama (identitas Elaina)
+    contents.push({
+      role: "user",
+      parts: [{ text: currentPrompt }]
+    });
+    
+    // 2. Tambahkan SEMUA riwayat chat (user dan AI bergantian)
+    for (const chat of chatHistory) {
+      // Pesan user
+      if (chat.message && chat.message.trim() !== '') {
+        contents.push({
+          role: "user",
+          parts: [{ text: chat.message }]
+        });
+      }
+      
+      // Balasan AI
+      if (chat.reply && chat.reply.trim() !== '') {
+        contents.push({
+          role: "model",
+          parts: [{ text: chat.reply }]
+        });
+      }
+    }
+    
+    // 3. Pesan terbaru dari user
+    contents.push({
+      role: "user",
+      parts: [{ text: message }]
+    });
+
+    console.log(`📤 Mengirim ${contents.length} pesan ke Gemini (${user.username})`);
+
+    while (true) {
+      const apiKey = getActiveKey();
+      
+      if (!apiKey) {
+        return res.status(500).json({ error: "Tidak ada API key yang tersedia" });
+      }
+      
+      keyTried.push(apiKey);
+
+      try {
+        const GEMINI_MODEL = "gemini-2.5-flash";
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
+
+        const response = await axios.post(GEMINI_API_URL, { contents }, {
+          headers: { 'Content-Type': 'application/json' },
+          timeout: 30000
+        });
+
+        const reply = response.data.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, saya tidak bisa merespons saat ini.";
+
+        // Simpan chat history ke MongoDB
+        if (db) {
+          try {
+            await db.collection('chats').insertOne({
+              userId: user.userId,
+              username: user.username,
+              message,
+              reply,
+              isDeveloper: user.isDeveloper,
+              createdAt: new Date()
+            });
+            console.log(`💾 Chat tersimpan untuk ${user.username}`);
+          } catch (dbError) {
+            console.error('Error saving chat to database:', dbError.message);
+          }
+        }
+
+        // Generate voice note for AI response
+        let voiceData = null;
+        try {
+          voiceData = await generateVoiceNote(reply, 'female');
+        } catch (voiceError) {
+          console.error('Voice generation error:', voiceError);
+        }
+
+        return res.json({ 
+          reply,
+          voiceNote: voiceData ? voiceData.toString('base64') : null
+        });
+
+      } catch (err) {
+        if (err.response?.status === 403 || err.response?.status === 401) {
+          blockKey(apiKey);
+          const remaining = apikeyData.keys.filter(k => !k.blocked).length;
+          if (remaining === 0) return res.status(500).json({ error: "Semua API key diblokir" });
+          continue;
+        } else {
+          console.error('Gemini API Error:', err.message);
+          return res.status(500).json({ error: "Gagal terhubung ke AI service" });
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Chat error:', error);
+    res.status(500).json({ error: "Terjadi kesalahan server" });
+  }
+});
+
+// Multimedia chat endpoint dengan history LENGKAP
 app.post('/api/chat/multimedia', requireAuth, upload.single('file'), async (req, res) => {
   try {
     const { message } = req.body;
@@ -557,9 +690,6 @@ app.post('/api/chat/multimedia', requireAuth, upload.single('file'), async (req,
     
     const finalMessage = message || (isVoiceNote ? 'Voice note' : '');
     
-    // Prepare content for Gemini
-    const currentPrompt = user.isDeveloper ? DEVELOPER_PROMPT : USER_PROMPT;
-    
     // Gunakan Gemini API dengan support multimodal
     const apiKey = getActiveKey();
     if (!apiKey) {
@@ -569,15 +699,46 @@ app.post('/api/chat/multimedia', requireAuth, upload.single('file'), async (req,
     const GEMINI_MODEL = "gemini-1.5-pro"; // Model yang support multimodal
     const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
     
-    let contents = [];
+    // Ambil SEMUA riwayat chat dari database
+    let chatHistory = [];
+    if (db) {
+      chatHistory = await db.collection('chats')
+        .find({ userId: user.userId })
+        .sort({ createdAt: -1 })
+        .limit(50)
+        .toArray();
+      
+      chatHistory = chatHistory.reverse();
+    }
     
-    // Build content with system prompt
+    // Bangun contents array dengan history lengkap
+    const contents = [];
+    
+    // System prompt
+    const currentPrompt = user.isDeveloper ? DEVELOPER_PROMPT : USER_PROMPT;
     contents.push({
       role: "user",
       parts: [{ text: currentPrompt }]
     });
     
-    // Add file if exists
+    // Tambahkan SEMUA riwayat chat
+    for (const chat of chatHistory) {
+      if (chat.message && chat.message.trim() !== '') {
+        contents.push({
+          role: "user",
+          parts: [{ text: chat.message }]
+        });
+      }
+      
+      if (chat.reply && chat.reply.trim() !== '') {
+        contents.push({
+          role: "model",
+          parts: [{ text: chat.reply }]
+        });
+      }
+    }
+    
+    // Buat parts untuk pesan saat ini
     let userParts = [];
     
     if (fileData && fileMimeType) {
@@ -602,6 +763,8 @@ app.post('/api/chat/multimedia', requireAuth, upload.single('file'), async (req,
       parts: userParts
     });
     
+    console.log(`📤 Mengirim ${contents.length} pesan multimedia ke Gemini (${user.username})`);
+    
     const response = await axios.post(GEMINI_API_URL, { contents }, {
       headers: { 'Content-Type': 'application/json' },
       timeout: 30000
@@ -616,7 +779,7 @@ app.post('/api/chat/multimedia', requireAuth, upload.single('file'), async (req,
         await db.collection('chats').insertOne({
           userId: user.userId,
           username: user.username,
-          message: finalMessage,
+          message: finalMessage || '[File]',
           fileType: fileMimeType,
           fileName: file?.originalname,
           reply,
@@ -647,93 +810,7 @@ app.post('/api/chat/multimedia', requireAuth, upload.single('file'), async (req,
   }
 });
 
-// Regular chat endpoint (untuk backward compatibility)
-app.post('/api/chat', requireAuth, async (req, res) => {
-  const { message } = req.body;
-  const user = req.user;
-  
-  if (!message || message.trim() === '') {
-    return res.status(400).json({ error: "Pesan tidak boleh kosong" });
-  }
-
-  let keyTried = [];
-  const currentPrompt = user.isDeveloper ? DEVELOPER_PROMPT : USER_PROMPT;
-  
-  while (true) {
-    const apiKey = getActiveKey();
-    
-    if (!apiKey) {
-      return res.status(500).json({ error: "Tidak ada API key yang tersedia" });
-    }
-    
-    keyTried.push(apiKey);
-
-    try {
-      const GEMINI_MODEL = "gemini-2.5-flash";
-      const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
-
-      const contents = [
-        {
-          role: "user",
-          parts: [{ text: currentPrompt }]
-        },
-        {
-          role: "user", 
-          parts: [{ text: message }]
-        }
-      ];
-
-      const response = await axios.post(GEMINI_API_URL, { contents }, {
-        headers: { 'Content-Type': 'application/json' },
-        timeout: 30000
-      });
-
-      const reply = response.data.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, saya tidak bisa merespons saat ini.";
-
-      // Simpan chat history ke MongoDB jika database tersedia
-      if (db) {
-        try {
-          await db.collection('chats').insertOne({
-            userId: user.userId,
-            username: user.username,
-            message,
-            reply,
-            isDeveloper: user.isDeveloper,
-            createdAt: new Date()
-          });
-        } catch (dbError) {
-          console.error('Error saving chat to database:', dbError.message);
-        }
-      }
-
-      // Generate voice note for AI response
-      let voiceData = null;
-      try {
-        voiceData = await generateVoiceNote(reply, 'female');
-      } catch (voiceError) {
-        console.error('Voice generation error:', voiceError);
-      }
-
-      return res.json({ 
-        reply,
-        voiceNote: voiceData ? voiceData.toString('base64') : null
-      });
-
-    } catch (err) {
-      if (err.response?.status === 403 || err.response?.status === 401) {
-        blockKey(apiKey);
-        const remaining = apikeyData.keys.filter(k => !k.blocked).length;
-        if (remaining === 0) return res.status(500).json({ error: "Semua API key diblokir" });
-        continue;
-      } else {
-        console.error('Gemini API Error:', err.message);
-        return res.status(500).json({ error: "Gagal terhubung ke AI service" });
-      }
-    }
-  }
-});
-
-// Get chat history - IMPROVED dengan MongoDB
+// Get chat history - Mengambil SEMUA riwayat chat
 app.get('/api/chat/history', requireAuth, async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -742,15 +819,16 @@ app.get('/api/chat/history', requireAuth, async (req, res) => {
       return res.json({ messages: [] });
     }
     
-    // Ambil chat history dari MongoDB
+    // Ambil SEMUA chat history dari MongoDB (unlimited)
     const chats = await db.collection('chats')
       .find({ userId })
-      .sort({ createdAt: -1 })
-      .limit(50)
+      .sort({ createdAt: 1 }) // Urutkan dari yang terlama
       .toArray();
     
+    console.log(`📚 Mengirim ${chats.length} riwayat chat ke client ${req.user.username}`);
+    
     // Format ulang data untuk client
-    const messages = chats.reverse().map(chat => ({
+    const messages = chats.map(chat => ({
       id: chat._id.toString(),
       message: chat.message,
       reply: chat.reply,

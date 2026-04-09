@@ -20,7 +20,6 @@
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --code-bg: #1a1a1a;
             --code-text: #f8f8f2;
-            --code-line: #343434;
             --success-color: #10b981;
             --error-color: #ef4444;
             --music-bg: rgba(255, 255, 255, 0.95);
@@ -43,7 +42,6 @@
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
             --code-bg: #1e1e1e;
             --code-text: #d4d4d4;
-            --code-line: #2d2d2d;
             --music-bg: rgba(30, 41, 59, 0.95);
         }
 
@@ -53,9 +51,6 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
         }
 
         html, body {
@@ -84,7 +79,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://files.catbox.moe/4zrnsf.jpeg');
+            background-image: url('https://cdn.phototourl.com/free/2026-04-09-916e016c-9e1e-4dd5-a948-e6d691bb6a21.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -92,21 +87,6 @@
             opacity: 0.15;
             z-index: -1;
             pointer-events: none;
-        }
-
-        .dark-mode::before {
-            opacity: 0.1;
-        }
-
-        /* Prevent zoom on double-tap */
-        * {
-            -webkit-text-size-adjust: none;
-            text-size-adjust: none;
-        }
-
-        /* Prevent pull-to-refresh */
-        body {
-            overscroll-behavior-y: none;
         }
 
         header {
@@ -226,15 +206,15 @@
         }
 
         .chat-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: calc(100vh - 120px);
-    overflow: hidden;
-    z-index: 1;
-    position: relative;
-}
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: calc(100vh - 120px);
+            overflow: hidden;
+            z-index: 1;
+            position: relative;
+        }
 
         .chat-messages {
             flex: 1;
@@ -246,7 +226,6 @@
             min-height: 0;
         }
 
-        /* Custom scrollbar for chat messages */
         .chat-messages::-webkit-scrollbar {
             width: 4px;
         }
@@ -258,10 +237,6 @@
         .chat-messages::-webkit-scrollbar-thumb {
             background: var(--primary-color);
             border-radius: 2px;
-        }
-
-        .chat-messages::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
         }
 
         .message {
@@ -363,20 +338,20 @@
         }
 
         .input-container {
-    display: flex;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background-color: var(--card-bg);
-    box-shadow: var(--shadow);
-    margin-top: auto;
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--border-color);
-    flex-shrink: 0;
-    min-height: 70px;
-    align-items: flex-end;
-    position: relative;
-    z-index: 100;
-}
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            margin-top: auto;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+            min-height: 70px;
+            align-items: flex-end;
+            position: relative;
+            z-index: 100;
+        }
 
         .message-input {
             flex: 1;
@@ -402,7 +377,6 @@
             box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.1);
         }
 
-        /* PERBAIKAN: Tombol kirim yang lebih besar untuk mobile */
         .send-button {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
@@ -425,19 +399,7 @@
             box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
         }
 
-        .send-button:active {
-            transform: translateY(0);
-        }
-
-        .send-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Style untuk tombol attachment */
-        .attach-button {
+        .attach-button, .voice-button {
             background: var(--bg-color);
             border: 1px solid var(--border-color);
             color: var(--text-color);
@@ -454,32 +416,10 @@
             font-size: 1.2rem;
         }
 
-        .attach-button:hover {
+        .attach-button:hover, .voice-button:hover {
             background: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
-        }
-
-        .attach-button:active {
-            transform: scale(0.95);
-        }
-
-        /* Style untuk voice button */
-        .voice-button {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 0.75rem;
-            padding: 0.75rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            min-width: 50px;
-            min-height: 50px;
-            flex-shrink: 0;
-            font-size: 1.2rem;
         }
 
         .voice-button.recording {
@@ -495,7 +435,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Style untuk preview attachment */
         .attachment-preview {
             display: none;
             padding: 0.75rem;
@@ -512,223 +451,6 @@
             display: flex;
         }
 
-        .preview-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 0.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .preview-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .preview-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .preview-size {
-            font-size: 0.75rem;
-            color: var(--text-light);
-        }
-
-        .remove-attachment {
-            background: none;
-            border: none;
-            color: var(--text-light);
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 0.25rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .remove-attachment:hover {
-            color: var(--error-color);
-        }
-
-        /* Style untuk media dalam chat */
-        .chat-media {
-            max-width: 200px;
-            max-height: 200px;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-        }
-
-        .chat-media.video {
-            max-width: 250px;
-        }
-
-        .chat-media.audio {
-            width: 250px;
-            height: 40px;
-        }
-
-        .file-attachment {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            max-width: 250px;
-        }
-
-        .file-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 0.25rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .file-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .file-name {
-            font-weight: 600;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .file-size {
-            font-size: 0.7rem;
-            color: var(--text-light);
-        }
-
-        .download-button {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 1rem;
-            padding: 0.25rem;
-            border-radius: 0.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .download-button:hover {
-            color: var(--primary-color);
-        }
-
-        .voice-message {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            max-width: 250px;
-        }
-
-        .voice-play-button {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .voice-wave {
-            flex: 1;
-            height: 30px;
-            background-color: var(--border-color);
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .voice-wave-progress {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            border-radius: 15px;
-            transition: width 0.1s;
-        }
-
-        .welcome-message {
-            text-align: center;
-            padding: 2rem 1rem;
-            color: var(--text-light);
-            backdrop-filter: blur(5px);
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 1rem;
-            margin: 0.5rem;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-
-        .dark-mode .welcome-message {
-            background-color: rgba(30, 41, 59, 0.8);
-        }
-
-        .welcome-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-            font-weight: 700;
-        }
-
-        .welcome-subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        .footer {
-    text-align: center;
-    padding: 0.75rem;
-    color: var(--text-light);
-    font-size: 0.8rem;
-    z-index: 1;
-    background-color: var(--card-bg);
-    border-top: 1px solid var(--border-color);
-    flex-shrink: 0;
-    min-height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-        /* Code block styles */
         .code-block {
             margin: 0.5rem 0;
             border-radius: 0.5rem;
@@ -765,7 +487,6 @@
             padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
             transition: all 0.2s;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .copy-button:hover {
@@ -792,7 +513,7 @@
             user-select: text;
         }
 
-        /* Music player styles */
+        /* Music Player Styles - Enhanced */
         .music-player {
             position: fixed;
             bottom: 80px;
@@ -801,7 +522,7 @@
             border-radius: 1rem;
             padding: 1rem;
             box-shadow: var(--shadow);
-            width: 300px;
+            width: 320px;
             max-width: calc(100vw - 20px);
             z-index: 1000;
             backdrop-filter: blur(20px);
@@ -843,7 +564,6 @@
             height: 28px;
             border-radius: 50%;
             transition: background-color 0.2s;
-            flex-shrink: 0;
         }
 
         .close-button:hover {
@@ -858,8 +578,8 @@
         }
 
         .track-cover {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 0.5rem;
             object-fit: cover;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -881,11 +601,66 @@
         }
 
         .track-artist {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-light);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        .playlist {
+            margin-top: 0.75rem;
+            max-height: 200px;
+            overflow-y: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.75rem;
+        }
+
+        .playlist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .playlist-item:hover {
+            background-color: var(--border-color);
+        }
+
+        .playlist-item.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+        }
+
+        .playlist-item.active .track-artist {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .playlist-number {
+            width: 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .playlist-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .playlist-name {
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .playlist-artist {
+            font-size: 0.7rem;
+            opacity: 0.7;
         }
 
         .music-controls {
@@ -909,7 +684,6 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            flex-shrink: 0;
         }
 
         .control-button:hover {
@@ -927,12 +701,10 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 8px rgba(138, 43, 226, 0.3);
-            flex-shrink: 0;
         }
 
         .play-button:hover {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-            color: white;
             transform: scale(1.05);
         }
 
@@ -944,7 +716,6 @@
             cursor: pointer;
             margin-bottom: 0.5rem;
             overflow: hidden;
-            flex-shrink: 0;
         }
 
         .progress-bar {
@@ -961,14 +732,12 @@
             font-size: 0.7rem;
             color: var(--text-light);
             margin-bottom: 0.75rem;
-            flex-shrink: 0;
         }
 
         .volume-control {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            flex-shrink: 0;
         }
 
         .volume-slider {
@@ -978,7 +747,6 @@
             border-radius: 1.5px;
             outline: none;
             -webkit-appearance: none;
-            flex-shrink: 1;
         }
 
         .volume-slider::-webkit-slider-thumb {
@@ -988,10 +756,9 @@
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* Contact panel styles */
+        /* Contact Panel */
         .contact-panel {
             position: fixed;
             bottom: 80px;
@@ -1047,13 +814,11 @@
             color: var(--text-color);
             background-color: var(--bg-color);
             border: 1px solid var(--border-color);
-            min-height: 60px;
         }
 
         .contact-item:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow);
-            background-color: var(--card-bg);
         }
 
         .contact-icon {
@@ -1068,17 +833,9 @@
             flex-shrink: 0;
         }
 
-        .whatsapp-icon {
-            background: linear-gradient(135deg, var(--whatsapp-color), #128C7E);
-        }
-
-        .telegram-icon {
-            background: linear-gradient(135deg, var(--telegram-color), #0077B5);
-        }
-
-        .channel-icon {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-        }
+        .whatsapp-icon { background: linear-gradient(135deg, #25d366, #128C7E); }
+        .telegram-icon { background: linear-gradient(135deg, #0088cc, #0077B5); }
+        .channel-icon { background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); }
 
         .contact-info {
             flex: 1;
@@ -1102,286 +859,66 @@
             text-overflow: ellipsis;
         }
 
-        /* Clear chat button */
-        .clear-chat-button {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            background: var(--error-color);
-            color: white;
-            border: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-            z-index: 10;
-        }
-
-        .clear-chat-button:hover {
-            background: #dc2626;
-            transform: translateY(-1px);
-        }
-
-        /* No messages state */
-        .no-messages {
+        .welcome-message {
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 2rem 1rem;
             color: var(--text-light);
-            flex: 1;
+            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 1rem;
+            margin: 0.5rem;
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .dark-mode .welcome-message {
+            background-color: rgba(30, 41, 59, 0.8);
+        }
+
+        .welcome-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 0.75rem;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            z-index: 1;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+            min-height: 50px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        .no-messages-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        .no-messages-text {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .no-messages-subtext {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        /* PERBAIKAN: Media queries untuk mobile yang lebih baik */
         @media (max-width: 768px) {
-            .chat-container {
-                height: calc(100vh - 110px);
-            }
-            
-            .message {
-                max-width: 95%;
-            }
-            
-            .header-controls {
-                gap: 0.25rem;
-            }
-            
-            .user-info {
-                padding: 0.25rem 0.375rem;
-            }
-            
-            .username {
-                display: none;
-            }
-            
-            .input-container {
-                padding: 0.5rem;
-                min-height: 70px;
-                gap: 0.75rem;
-            }
-            
-            .message-input {
-                min-height: 50px;
-                padding: 0.75rem;
-                font-size: 1rem;
-            }
-            
-            /* PERBAIKAN: Tombol kirim lebih besar di mobile */
-            .send-button {
-                min-width: 60px;
-                min-height: 50px;
-                padding: 0.75rem;
-                font-size: 1.3rem;
-                border-radius: 0.75rem;
-            }
-
-            .attach-button, .voice-button {
-                min-width: 50px;
-                min-height: 50px;
-            }
-            
-            .music-player {
-                width: calc(100% - 20px);
-                right: 10px;
-                left: 10px;
-                bottom: 70px;
-            }
-            
-            .contact-panel {
-                width: calc(100% - 20px);
-                left: 10px;
-                bottom: 70px;
-            }
-            
-            .welcome-message {
-                padding: 1.5rem 0.75rem;
-                margin: 0.25rem;
-            }
-            
-            .welcome-title {
-                font-size: 1.3rem;
-            }
-            
-            .footer {
-                padding: 0.5rem;
-                min-height: 40px;
-                font-size: 0.75rem;
-            }
+            .chat-container { height: calc(100vh - 110px); }
+            .message { max-width: 95%; }
+            .username { display: none; }
+            .input-container { padding: 0.5rem; min-height: 70px; gap: 0.75rem; }
+            .send-button, .attach-button, .voice-button { min-width: 55px; min-height: 50px; }
+            .music-player { width: calc(100% - 20px); right: 10px; left: 10px; bottom: 70px; }
+            .contact-panel { width: calc(100% - 20px); left: 10px; bottom: 70px; }
         }
 
         @media (max-width: 480px) {
-            header {
-                padding: 0.5rem 0.75rem;
-                min-height: 50px;
-            }
-            
-            .logo-text {
-                font-size: 1rem;
-            }
-            
-            .logo-icon {
-                width: 28px;
-                height: 28px;
-                font-size: 0.9rem;
-            }
-            
-            .header-button {
-                width: 32px;
-                height: 32px;
-                font-size: 0.9rem;
-            }
-            
-            .chat-messages {
-                padding: 0.5rem;
-            }
-            
-            .message {
-                max-width: 98%;
-            }
-            
-            .message-bubble {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.9rem;
-            }
-            
-            .chat-container {
-                height: calc(100vh - 100px);
-            }
-            
-            /* PERBAIKAN: Input area lebih besar di layar kecil */
-            .input-container {
-                padding: 0.75rem;
-                min-height: 80px;
-            }
-            
-            .message-input {
-                min-height: 55px;
-                padding: 0.875rem;
-            }
-            
-            .send-button {
-                min-width: 65px;
-                min-height: 55px;
-                font-size: 1.4rem;
-            }
-
-            .attach-button, .voice-button {
-                min-width: 55px;
-                min-height: 55px;
-            }
-
-            .chat-media {
-                max-width: 150px;
-                max-height: 150px;
-            }
-
-            .chat-media.video {
-                max-width: 200px;
-            }
-
-            .file-attachment, .voice-message {
-                max-width: 200px;
-            }
+            header { padding: 0.5rem 0.75rem; min-height: 50px; }
+            .logo-text { font-size: 1rem; }
+            .send-button { min-width: 60px; min-height: 55px; font-size: 1.3rem; }
+            .attach-button, .voice-button { min-width: 50px; min-height: 50px; }
         }
 
-        /* Landscape orientation support */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .chat-container {
-                height: calc(100vh - 80px);
-            }
-            
-            header {
-                min-height: 50px;
-                padding: 0.5rem;
-            }
-            
-            .footer {
-                min-height: 30px;
-                padding: 0.25rem;
-            }
-            
-            .input-container {
-                z-index: 100;
-                position: relative;
-            }
-            
-            /* PERBAIKAN: Tombol tetap besar di landscape */
-            .send-button {
-                min-width: 55px;
-                min-height: 50px;
-            }
-
-            .attach-button, .voice-button {
-                min-width: 50px;
-                min-height: 50px;
-            }
-        }
-
-        /* PERBAIKAN: Touch target yang lebih besar untuk aksesibilitas */
-        @media (max-width: 768px) {
-            .header-button,
-            .control-button,
-            .close-button,
-            .contact-item {
-                min-width: 44px;
-                min-height: 44px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-    .chat-container {
-        height: calc(100vh - 110px);
-    }
-    
-    .input-container {
-        z-index: 100;
-        position: relative;
-    }
-    
-    .footer {
-        z-index: 1;
-        position: relative;
-    }
-}
-
-@media (max-width: 480px) {
-    .chat-container {
-        height: calc(100vh - 100px);
-    }
-    
-    .input-container {
-        padding: 0.75rem;
-        min-height: 80px;
-        z-index: 100;
-    }
-}
-
-        /* Prevent text selection on most elements */
-        .logo, .user-info, .header-button, .message-time, .typing-indicator, .contact-item, .music-controls {
-            -webkit-user-select: none;
-            user-select: none;
-        }
-
-        /* Allow text selection only in message bubbles and code blocks */
         .message-bubble, .code-content, .message-input {
             -webkit-user-select: text;
             user-select: text;
@@ -1455,17 +992,17 @@
         <span>© 2024 Elaina Assistant - AI Chat Interface</span>
     </div>
 
-    <!-- Music Player -->
+    <!-- Music Player with Playlist -->
     <div class="music-player" id="musicPlayer">
         <div class="music-header">
-            <div class="music-title">Pemutar Musik</div>
+            <div class="music-title">🎵 Pemutar Musik</div>
             <button class="close-button" id="closeMusicPlayer">✕</button>
         </div>
         <div class="track-info">
-            <img src="https://files.catbox.moe/4zrnsf.jpeg" alt="Track Cover" class="track-cover">
+            <img src="https://files.catbox.moe/4zrnsf.jpeg" alt="Track Cover" class="track-cover" id="trackCover">
             <div class="track-details">
-                <div class="track-name">Lofi Chill Study Beats</div>
-                <div class="track-artist">Elaina AI Radio</div>
+                <div class="track-name" id="trackName">Lofi Chill Study Beats</div>
+                <div class="track-artist" id="trackArtist">Elaina AI Radio</div>
             </div>
         </div>
         <div class="progress-container" id="progressContainer">
@@ -1484,12 +1021,15 @@
             <span>🔊</span>
             <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
         </div>
+        <div class="playlist" id="playlist">
+            <!-- Playlist akan diisi oleh JavaScript -->
+        </div>
     </div>
 
     <!-- Contact Panel -->
     <div class="contact-panel" id="contactPanel">
         <div class="contact-header">
-            <div class="contact-title">Kontak Developer</div>
+            <div class="contact-title">📞 Kontak Developer</div>
             <button class="close-button" id="closeContactPanel">✕</button>
         </div>
         <div class="contact-list">
@@ -1518,10 +1058,8 @@
     </div>
 
     <script>
-        // Session management
         let currentSessionId = localStorage.getItem('sessionId');
         
-        // DOM Elements
         const chatMessages = document.getElementById('chatMessages');
         const messageInput = document.getElementById('messageInput');
         const sendButton = document.getElementById('sendButton');
@@ -1540,6 +1078,8 @@
         const musicPlayer = document.getElementById('musicPlayer');
         const closeMusicPlayer = document.getElementById('closeMusicPlayer');
         const playButton = document.getElementById('playButton');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
         const progressContainer = document.getElementById('progressContainer');
         const progressBar = document.getElementById('progressBar');
         const currentTime = document.getElementById('currentTime');
@@ -1550,70 +1090,150 @@
         const closeContactPanel = document.getElementById('closeContactPanel');
         const usernameDisplay = document.getElementById('usernameDisplay');
         const userBadge = document.getElementById('userBadge');
+        const trackName = document.getElementById('trackName');
+        const trackArtist = document.getElementById('trackArtist');
+        const trackCover = document.getElementById('trackCover');
+        const playlistContainer = document.getElementById('playlist');
 
-        // Audio setup
-        const audio = new Audio();
+        // Playlist Data - BANYAK MUSIK!
+        const playlist = [
+            { name: "Lofi Chill Study Beats", artist: "Elaina AI Radio", url: "https://files.catbox.moe/ve0lvk.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
+            { name: "Midnight Coffee", artist: "Lofi Girl", url: "https://files.catbox.moe/2k7g8h.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
+            { name: "Rainy Day", artist: "Chillhop Music", url: "https://files.catbox.moe/3l9m4n.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
+            { name: "Study Session", artist: "Study Beats", url: "https://files.catbox.moe/5p6q7r.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
+            { name: "Deep Focus", artist: "Focus Music", url: "https://files.catbox.moe/8s9t0u.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
+            { name: "Calm Piano", artist: "Relaxing Piano", url: "https://files.catbox.moe/1v2w3x.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
+            { name: "Electronic Dreams", artist: "Synthwave", url: "https://files.catbox.moe/4y5z6a.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
+            { name: "Ambient Sunset", artist: "Ambient Music", url: "https://files.catbox.moe/7b8c9d.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" }
+        ];
+
+        let currentTrackIndex = 0;
+        let audio = new Audio();
         let isPlaying = false;
         let isDragging = false;
-
-        // Voice recording variables
         let mediaRecorder;
         let audioChunks = [];
         let isRecording = false;
-        let recordedAudio = null;
-
-        // Attachment variables
         let selectedFile = null;
 
-        // Check authentication and load user info
-        checkAuthStatus();
-
-        // Theme Management
-        function initTheme() {
-            const savedTheme = localStorage.getItem('darkMode') || 'light';
-            document.body.classList.toggle('dark-mode', savedTheme === 'true');
-            updateThemeIcon();
+        // Load playlist UI
+        function loadPlaylist() {
+            playlistContainer.innerHTML = '';
+            playlist.forEach((track, index) => {
+                const item = document.createElement('div');
+                item.className = `playlist-item ${index === currentTrackIndex ? 'active' : ''}`;
+                item.innerHTML = `
+                    <div class="playlist-number">${index + 1}</div>
+                    <div class="playlist-info">
+                        <div class="playlist-name">${track.name}</div>
+                        <div class="playlist-artist">${track.artist}</div>
+                    </div>
+                `;
+                item.addEventListener('click', () => playTrack(index));
+                playlistContainer.appendChild(item);
+            });
         }
 
-        function updateThemeIcon() {
-            const isDark = document.body.classList.contains('dark-mode');
-            themeToggle.textContent = isDark ? '☀️' : '🌙';
+        function playTrack(index) {
+            currentTrackIndex = index;
+            const track = playlist[currentTrackIndex];
+            audio.src = track.url;
+            trackName.textContent = track.name;
+            trackArtist.textContent = track.artist;
+            trackCover.src = track.cover;
+            audio.load();
+            audio.play().catch(e => console.log('Play error:', e));
+            isPlaying = true;
+            playButton.innerHTML = '⏸';
+            updatePlaylistActive();
         }
 
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDark);
-            updateThemeIcon();
+        function updatePlaylistActive() {
+            const items = playlistContainer.querySelectorAll('.playlist-item');
+            items.forEach((item, idx) => {
+                if (idx === currentTrackIndex) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            playTrack(currentTrackIndex);
+        }
+
+        function prevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            playTrack(currentTrackIndex);
+        }
+
+        function togglePlayPause() {
+            if (isPlaying) {
+                audio.pause();
+                playButton.innerHTML = '▶';
+            } else {
+                audio.play().catch(e => console.log('Play error:', e));
+                playButton.innerHTML = '⏸';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function setupAudio() {
+            audio.src = playlist[0].url;
+            trackName.textContent = playlist[0].name;
+            trackArtist.textContent = playlist[0].artist;
+            
+            audio.addEventListener('loadedmetadata', () => {
+                duration.textContent = formatTime(audio.duration);
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                if (!isDragging) {
+                    const progress = (audio.currentTime / audio.duration) * 100;
+                    progressBar.style.width = `${progress}%`;
+                    currentTime.textContent = formatTime(audio.currentTime);
+                }
+            });
+
+            audio.addEventListener('ended', () => {
+                nextTrack();
+            });
+
+            volumeSlider.addEventListener('input', () => {
+                audio.volume = volumeSlider.value;
+            });
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
         });
 
-        // Authentication check
+        // Authentication and Chat Functions
         async function checkAuthStatus() {
             try {
                 const response = await fetch('/api/auth/status', {
-                    headers: {
-                        'Authorization': `Bearer ${currentSessionId}`
-                    }
+                    headers: { 'Authorization': `Bearer ${currentSessionId}` }
                 });
                 const data = await response.json();
-                
                 if (!data.isAuthenticated) {
                     window.location.href = '/';
                     return;
                 }
-
-                // Display user info
-                const savedUsername = localStorage.getItem('username') || data.username;
-                const savedIsDeveloper = localStorage.getItem('isDeveloper') === 'true' || data.isDeveloper;
-                
-                usernameDisplay.textContent = savedUsername;
-                userBadge.textContent = savedIsDeveloper ? 'Developer' : 'User';
-                
-                if (savedIsDeveloper) {
-                    userBadge.classList.add('developer');
-                }
-
-                // Load chat history
+                usernameDisplay.textContent = localStorage.getItem('username') || data.username;
+                const isDev = localStorage.getItem('isDeveloper') === 'true' || data.isDeveloper;
+                userBadge.textContent = isDev ? 'Developer' : 'User';
+                if (isDev) userBadge.classList.add('developer');
                 loadChatHistory();
             } catch (error) {
                 console.error('Auth check error:', error);
@@ -1621,232 +1241,102 @@
             }
         }
 
-        // Load chat history
         async function loadChatHistory() {
             try {
                 const response = await fetch('/api/chat/history', {
-                    headers: {
-                        'Authorization': `Bearer ${currentSessionId}`
-                    }
+                    headers: { 'Authorization': `Bearer ${currentSessionId}` }
                 });
                 const data = await response.json();
-                
                 const welcomeMessage = chatMessages.querySelector('.welcome-message');
-                if (welcomeMessage && data.messages && data.messages.length > 0) {
-                    welcomeMessage.remove();
-                }
-                
-                // Add messages to chat
+                if (welcomeMessage && data.messages && data.messages.length > 0) welcomeMessage.remove();
                 if (data.messages) {
                     data.messages.forEach(message => {
-                        addMessageToChat(message.message, true, message.fileType, message.fileName);
+                        addMessageToChat(message.message, true);
                         addMessageToChat(message.reply, false);
                     });
                 }
-                
                 scrollToBottom();
             } catch (error) {
                 console.error('Error loading chat history:', error);
             }
         }
 
-        // Message Handling - TERINTEGRASI DENGAN API GEMINI
         async function sendMessage() {
             const message = messageInput.value.trim();
             const hasAttachment = selectedFile !== null;
-
             if (!message && !hasAttachment) return;
 
-            // Clear input and reset height
-            const messageText = messageInput.value;
             messageInput.value = '';
             messageInput.style.height = 'auto';
             
-            // Add user message to chat (with attachment if any)
             if (hasAttachment) {
-                addMessageToChat(message || '📎 Mengirim file...', true, selectedFile.type, selectedFile.name);
+                addMessageToChat(message || '📎 Mengirim file...', true);
             } else if (message) {
                 addMessageToChat(message, true);
             }
             
-            // Show typing indicator
             typingIndicator.classList.add('active');
-            scrollToBottom();
-
-            // Disable input while waiting for response
             messageInput.disabled = true;
             sendButton.disabled = true;
 
             try {
                 let response;
-                
                 if (hasAttachment) {
-                    // Kirim dengan multimedia
                     const formData = new FormData();
                     formData.append('file', selectedFile);
-                    if (message) {
-                        formData.append('message', message);
-                    }
-                    
+                    if (message) formData.append('message', message);
                     response = await fetch('/api/chat/multimedia', {
                         method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${currentSessionId}`
-                        },
+                        headers: { 'Authorization': `Bearer ${currentSessionId}` },
                         body: formData
                     });
                 } else {
-                    // Kirim teks biasa
                     response = await fetch('/api/chat', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${currentSessionId}`
-                        },
-                        body: JSON.stringify({ 
-                            message,
-                            sessionId: currentSessionId 
-                        })
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentSessionId}` },
+                        body: JSON.stringify({ message, sessionId: currentSessionId })
                     });
                 }
-
                 const data = await response.json();
-
                 if (data.reply) {
                     addMessageToChat(data.reply, false);
-                    
-                    // Play voice note if available
-                    if (data.voiceNote) {
-                        playVoiceNote(data.voiceNote);
-                    }
                 } else if (data.error) {
                     addMessageToChat('❌ Maaf, terjadi kesalahan: ' + data.error, false);
                 }
             } catch (error) {
                 addMessageToChat('❌ Maaf, terjadi kesalahan koneksi. Silakan coba lagi.', false);
-                console.error('Chat error:', error);
             } finally {
                 typingIndicator.classList.remove('active');
                 messageInput.disabled = false;
                 sendButton.disabled = false;
                 messageInput.focus();
                 scrollToBottom();
-                
-                // Clear attachment
                 clearAttachment();
             }
         }
 
-        function playVoiceNote(base64Audio) {
-            try {
-                const audioData = atob(base64Audio);
-                const arrayBuffer = new ArrayBuffer(audioData.length);
-                const view = new Uint8Array(arrayBuffer);
-                for (let i = 0; i < audioData.length; i++) {
-                    view[i] = audioData.charCodeAt(i);
-                }
-                
-                const blob = new Blob([arrayBuffer], { type: 'audio/mp3' });
-                const url = URL.createObjectURL(blob);
-                const voiceAudio = new Audio(url);
-                voiceAudio.play();
-            } catch (error) {
-                console.error('Error playing voice note:', error);
-            }
-        }
-
-        function addMessageToChat(message, isUser, fileType = null, fileName = null) {
-            // Remove welcome message if it's the first user message
+        function addMessageToChat(message, isUser) {
             const welcomeMessage = chatMessages.querySelector('.welcome-message');
-            if (welcomeMessage && isUser) {
-                welcomeMessage.remove();
-            }
+            if (welcomeMessage && isUser) welcomeMessage.remove();
             
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
-            
             const messageBubble = document.createElement('div');
             messageBubble.className = 'message-bubble';
-            
-            // Add file preview if exists
-            if (fileType) {
-                const filePreview = createFilePreview(fileType, fileName, message);
-                messageBubble.appendChild(filePreview);
-            }
-            
-            // Process message content for code blocks
-            const processedContent = processMessageContent(message);
-            
-            // Add text content if not empty and not just file indicator
-            if (message && !message.startsWith('📎')) {
-                const textDiv = document.createElement('div');
-                textDiv.innerHTML = processedContent;
-                messageBubble.appendChild(textDiv);
-            }
+            messageBubble.innerHTML = processMessageContent(message);
             
             const timeDiv = document.createElement('div');
             timeDiv.className = 'message-time';
-            timeDiv.textContent = new Date().toLocaleTimeString('id-ID', { 
-                hour: '2-digit', 
-                minute: '2-digit' 
-            });
+            timeDiv.textContent = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
             
             messageDiv.appendChild(messageBubble);
             messageDiv.appendChild(timeDiv);
             chatMessages.appendChild(messageDiv);
-            
             scrollToBottom();
-            
-            // Add copy functionality to code blocks
             addCopyFunctionality(messageBubble);
         }
 
-        function createFilePreview(fileType, fileName, message) {
-            const container = document.createElement('div');
-            container.className = 'file-attachment';
-            
-            const icon = document.createElement('div');
-            icon.className = 'file-icon';
-            
-            // Set icon based on file type
-            if (fileType.startsWith('image/')) {
-                icon.textContent = '🖼️';
-            } else if (fileType.startsWith('video/')) {
-                icon.textContent = '🎥';
-            } else if (fileType.startsWith('audio/')) {
-                icon.textContent = '🎵';
-            } else if (fileType.includes('pdf')) {
-                icon.textContent = '📄';
-            } else if (fileType.includes('text')) {
-                icon.textContent = '📝';
-            } else if (fileType.includes('word')) {
-                icon.textContent = '📃';
-            } else {
-                icon.textContent = '📎';
-            }
-            
-            const info = document.createElement('div');
-            info.className = 'file-info';
-            
-            const name = document.createElement('div');
-            name.className = 'file-name';
-            name.textContent = fileName || 'File';
-            
-            const size = document.createElement('div');
-            size.className = 'file-size';
-            size.textContent = 'File terlampir';
-            
-            info.appendChild(name);
-            info.appendChild(size);
-            
-            container.appendChild(icon);
-            container.appendChild(info);
-            
-            return container;
-        }
-
         function processMessageContent(content) {
-            // Simple code block detection and formatting
             return content.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
                 const language = lang || 'text';
                 return `
@@ -1868,17 +1358,13 @@
         }
 
         function addCopyFunctionality(element) {
-            const copyButtons = element.querySelectorAll('.copy-button');
-            copyButtons.forEach(button => {
+            element.querySelectorAll('.copy-button').forEach(button => {
                 button.addEventListener('click', function() {
                     const codeContent = this.closest('.code-block').querySelector('.code-content').textContent;
-                    copyToClipboard(codeContent);
-                    
-                    // Visual feedback
+                    navigator.clipboard.writeText(codeContent);
                     const originalText = this.innerHTML;
                     this.innerHTML = '✅ Copied!';
                     this.classList.add('copied');
-                    
                     setTimeout(() => {
                         this.innerHTML = originalText;
                         this.classList.remove('copied');
@@ -1887,62 +1373,32 @@
             });
         }
 
-        function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-        }
-
         function scrollToBottom() {
-            setTimeout(() => {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 100);
+            setTimeout(() => chatMessages.scrollTop = chatMessages.scrollHeight, 100);
         }
 
-        // Input Handling
         function adjustTextareaHeight() {
             messageInput.style.height = 'auto';
             messageInput.style.height = Math.min(messageInput.scrollHeight, 100) + 'px';
         }
 
-        // Attachment Handling
-        attachButton.addEventListener('click', () => {
-            fileInput.click();
-        });
-
+        attachButton.addEventListener('click', () => fileInput.click());
         fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
                 selectedFile = file;
                 previewName.textContent = file.name;
                 previewSize.textContent = formatFileSize(file.size);
-                
-                // Set icon based on file type
-                if (file.type.startsWith('image/')) {
-                    previewIcon.textContent = '🖼️';
-                } else if (file.type.startsWith('video/')) {
-                    previewIcon.textContent = '🎥';
-                } else if (file.type.startsWith('audio/')) {
-                    previewIcon.textContent = '🎵';
-                } else if (file.type.includes('pdf')) {
-                    previewIcon.textContent = '📄';
-                } else if (file.type.includes('text')) {
-                    previewIcon.textContent = '📝';
-                } else {
-                    previewIcon.textContent = '📎';
-                }
-                
+                if (file.type.startsWith('image/')) previewIcon.textContent = '🖼️';
+                else if (file.type.startsWith('video/')) previewIcon.textContent = '🎥';
+                else if (file.type.startsWith('audio/')) previewIcon.textContent = '🎵';
+                else if (file.type.includes('pdf')) previewIcon.textContent = '📄';
+                else previewIcon.textContent = '📎';
                 attachmentPreview.classList.add('active');
             }
         });
 
-        removeAttachment.addEventListener('click', () => {
-            clearAttachment();
-        });
-
+        removeAttachment.addEventListener('click', clearAttachment);
         function clearAttachment() {
             selectedFile = null;
             fileInput.value = '';
@@ -1963,26 +1419,16 @@
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 mediaRecorder = new MediaRecorder(stream);
                 audioChunks = [];
-                
-                mediaRecorder.ondataavailable = (event) => {
-                    audioChunks.push(event.data);
-                };
-                
+                mediaRecorder.ondataavailable = (event) => audioChunks.push(event.data);
                 mediaRecorder.onstop = () => {
                     const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                    const audioFile = new File([audioBlob], 'voice_note.webm', { type: 'audio/webm' });
-                    
-                    // Set as selected file
-                    selectedFile = audioFile;
+                    selectedFile = new File([audioBlob], 'voice_note.webm', { type: 'audio/webm' });
                     previewName.textContent = 'Voice Note';
                     previewSize.textContent = formatFileSize(audioBlob.size);
                     previewIcon.textContent = '🎤';
                     attachmentPreview.classList.add('active');
-                    
-                    // Stop all tracks
                     stream.getTracks().forEach(track => track.stop());
                 };
-                
                 mediaRecorder.start();
                 isRecording = true;
                 voiceButton.classList.add('recording');
@@ -2003,120 +1449,54 @@
         }
 
         voiceButton.addEventListener('click', () => {
-            if (isRecording) {
-                stopVoiceRecording();
-            } else {
-                startVoiceRecording();
-            }
+            if (isRecording) stopVoiceRecording();
+            else startVoiceRecording();
         });
 
-        // Event Listeners
         sendButton.addEventListener('click', sendMessage);
-
         messageInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
             }
         });
-
         messageInput.addEventListener('input', adjustTextareaHeight);
 
-        // Music Player Functions
-        function toggleMusicPlayer() {
-            musicPlayer.classList.toggle('active');
-            if (musicPlayer.classList.contains('active')) {
-                contactPanel.classList.remove('active');
-            }
+        // Theme
+        function initTheme() {
+            const savedTheme = localStorage.getItem('darkMode') === 'true';
+            document.body.classList.toggle('dark-mode', savedTheme);
+            themeToggle.textContent = savedTheme ? '☀️' : '🌙';
         }
-
-        function togglePlayPause() {
-            if (isPlaying) {
-                audio.pause();
-                playButton.innerHTML = '▶';
-            } else {
-                audio.play().catch(e => console.log('Audio play failed:', e));
-                playButton.innerHTML = '⏸';
-            }
-            isPlaying = !isPlaying;
-        }
-
-        function setupAudio() {
-            // Set audio source
-            audio.src = 'https://files.catbox.moe/ve0lvk.mp3';
-            
-            audio.addEventListener('loadedmetadata', () => {
-                duration.textContent = formatTime(audio.duration);
-            });
-
-            audio.addEventListener('timeupdate', () => {
-                if (!isDragging) {
-                    const progress = (audio.currentTime / audio.duration) * 100;
-                    progressBar.style.width = `${progress}%`;
-                    currentTime.textContent = formatTime(audio.currentTime);
-                }
-            });
-
-            audio.addEventListener('ended', () => {
-                isPlaying = false;
-                playButton.innerHTML = '▶';
-                progressBar.style.width = '0%';
-                currentTime.textContent = '0:00';
-            });
-
-            volumeSlider.addEventListener('input', () => {
-                audio.volume = volumeSlider.value;
-            });
-        }
-
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return '0:00';
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        // Progress bar seeking
-        progressContainer.addEventListener('click', (e) => {
-            const rect = progressContainer.getBoundingClientRect();
-            const percent = (e.clientX - rect.left) / rect.width;
-            audio.currentTime = percent * audio.duration;
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
         });
 
-        // Contact Panel Functions
-        function toggleContactPanel() {
-            contactPanel.classList.toggle('active');
-            if (contactPanel.classList.contains('active')) {
-                musicPlayer.classList.remove('active');
-            }
-        }
+        // Music Player Controls
+        musicToggle.addEventListener('click', () => musicPlayer.classList.toggle('active'));
+        closeMusicPlayer.addEventListener('click', () => musicPlayer.classList.remove('active'));
+        playButton.addEventListener('click', togglePlayPause);
+        prevButton.addEventListener('click', prevTrack);
+        nextButton.addEventListener('click', nextTrack);
 
-        // Logout functionality
-        logoutButton.addEventListener('click', async function() {
+        // Contact Panel
+        contactToggle.addEventListener('click', () => contactPanel.classList.toggle('active'));
+        closeContactPanel.addEventListener('click', () => contactPanel.classList.remove('active'));
+
+        // Logout
+        logoutButton.addEventListener('click', async () => {
             if (confirm('Apakah Anda yakin ingin logout?')) {
                 try {
-                    const response = await fetch('/api/auth/logout', {
+                    await fetch('/api/auth/logout', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${currentSessionId}`
-                        },
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentSessionId}` },
                         body: JSON.stringify({ sessionId: currentSessionId })
                     });
-
-                    const data = await response.json();
-
-                    if (data.success) {
-                        // Clear localStorage
-                        localStorage.removeItem('sessionId');
-                        localStorage.removeItem('username');
-                        localStorage.removeItem('isDeveloper');
-                        currentSessionId = null;
-                        
-                        window.location.href = '/';
-                    } else {
-                        alert('Gagal logout: ' + data.error);
-                    }
+                    localStorage.clear();
+                    window.location.href = '/';
                 } catch (error) {
                     console.error('Logout error:', error);
                     alert('Terjadi kesalahan saat logout');
@@ -2124,42 +1504,20 @@
             }
         });
 
-        // Initialize
+        document.addEventListener('click', (e) => {
+            if (!musicPlayer.contains(e.target) && !musicToggle.contains(e.target)) musicPlayer.classList.remove('active');
+            if (!contactPanel.contains(e.target) && !contactToggle.contains(e.target)) contactPanel.classList.remove('active');
+        });
+
         function init() {
             initTheme();
             setupAudio();
-            
-            // Close panels when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!musicPlayer.contains(e.target) && !musicToggle.contains(e.target)) {
-                    musicPlayer.classList.remove('active');
-                }
-                if (!contactPanel.contains(e.target) && !contactToggle.contains(e.target)) {
-                    contactPanel.classList.remove('active');
-                }
-            });
-
-            // Event listeners for music player
-            musicToggle.addEventListener('click', toggleMusicPlayer);
-            closeMusicPlayer.addEventListener('click', () => {
-                musicPlayer.classList.remove('active');
-            });
-            playButton.addEventListener('click', togglePlayPause);
-
-            // Event listeners for contact panel
-            contactToggle.addEventListener('click', toggleContactPanel);
-            closeContactPanel.addEventListener('click', () => {
-                contactPanel.classList.remove('active');
-            });
-
-            // Initial scroll to bottom
+            loadPlaylist();
             scrollToBottom();
-            
-            // Auto-focus on message input
             messageInput.focus();
+            checkAuthStatus();
         }
 
-        // Start the application
         init();
     </script>
 </body>

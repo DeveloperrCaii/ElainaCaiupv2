@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elaina AI - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Elaina AI - Platform Kecerdasan Modern</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
     <style>
 :root {
@@ -18,6 +18,9 @@
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --success-color: #10b981;
             --error-color: #ef4444;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
         .dark-mode {
@@ -43,22 +46,19 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://files.catbox.moe/4zrnsf.jpeg');
+            background-image: url('https://cdn.phototourl.com/free/2026-04-09-916e016c-9e1e-4dd5-a948-e6d691bb6a21.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -70,27 +70,215 @@
             opacity: 0.1;
         }
 
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            z-index: 100;
+            animation: bounce 2s infinite;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 0.875rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary-hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn-primary-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-outline-hero {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline-hero:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Login Container */
+        .login-wrapper {
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
         .login-container {
-            background-color: var(--card-bg);
+            max-width: 420px;
+            margin: 0 auto;
+            background: var(--bg-color);
             padding: 2.5rem;
             border-radius: 1.5rem;
             box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 420px;
-            backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .logo {
@@ -141,7 +329,7 @@
             padding: 0.875rem 1rem;
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
-            background-color: var(--bg-color);
+            background-color: var(--card-bg);
             color: var(--text-color);
             font-size: 1rem;
             transition: all 0.2s;
@@ -151,12 +339,6 @@
         input:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
-            transform: translateY(-1px);
-        }
-
-        input::placeholder {
-            color: var(--text-light);
-            opacity: 0.7;
         }
 
         .btn {
@@ -185,16 +367,6 @@
             box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
         }
 
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
         .toggle-text {
             text-align: center;
             margin-top: 1.5rem;
@@ -207,15 +379,10 @@
             cursor: pointer;
             text-decoration: underline;
             font-weight: 600;
-            transition: color 0.2s;
-        }
-
-        .toggle-link:hover {
-            color: var(--primary-dark);
         }
 
         .theme-toggle {
-            position: absolute;
+            position: fixed;
             top: 1.5rem;
             right: 1.5rem;
             background: var(--card-bg);
@@ -231,6 +398,7 @@
             justify-content: center;
             transition: all 0.2s;
             backdrop-filter: blur(10px);
+            z-index: 100;
         }
 
         .theme-toggle:hover {
@@ -247,14 +415,8 @@
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .error-message {
@@ -298,15 +460,26 @@
             100% { transform: rotate(360deg); }
         }
 
-        @media (max-width: 480px) {
-            .login-container {
-                margin: 1rem;
-                padding: 2rem 1.5rem;
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
             }
-            
-            .theme-toggle {
-                top: 1rem;
-                right: 1rem;
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .features-section, .stats-section, .login-wrapper {
+                padding: 3rem 1rem;
+            }
+            .login-container {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -314,58 +487,142 @@
 <body>
     <button class="theme-toggle" id="themeToggle">🌙</button>
 
-    <div class="login-container">
-        <div class="logo">
-            <div class="logo-icon">E</div>
-            <div class="logo-text">Elaina AI</div>
-        </div>
-
-        <div id="errorMessage" class="message error-message hidden"></div>
-        <div id="successMessage" class="message success-message hidden"></div>
-        <div id="warningMessage" class="message warning-message hidden"></div>
-
-        <!-- Login Form -->
-        <div id="loginForm">
-            <div class="form-group">
-                <label for="loginUsername">Username</label>
-                <input type="text" id="loginUsername" placeholder="Masukkan username Anda" autocomplete="username">
-            </div>
-            <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" placeholder="Masukkan password Anda" autocomplete="current-password">
-            </div>
-            <button class="btn btn-primary" id="loginButton" onclick="login()">
-                <span>Masuk</span>
-            </button>
-            <div class="toggle-text">
-                Belum punya akun? <span class="toggle-link" onclick="showRegister()">Daftar di sini</span>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">✨ AI Assistant Premium</div>
+            <h1 class="hero-title">Elaina AI</h1>
+            <p class="hero-subtitle">Elaina selalu ada buat kamu, kapan pun kamu butuh~
+Bukan cuma sekadar AI, dia bisa jawab pertanyaanmu, bantu kerjaan, sampai jadi teman ngobrol yang nyambung. Kadang rasanya kayak lagi ditemani seseorang di perjalanan… bukan ngobrol sama mesin dingin.</p>
+            <div class="hero-buttons">
+                <button class="btn-hero btn-primary-hero" onclick="scrollToLogin()">🚀 Mulai Sekarang</button>
+                <button class="btn-hero btn-outline-hero" onclick="scrollToFeatures()">✨ Lihat Fitur</button>
             </div>
         </div>
+    </section>
 
-        <!-- Register Form -->
-        <div id="registerForm" class="hidden">
-            <div class="form-group">
-                <label for="registerUsername">Buat Username</label>
-                <input type="text" id="registerUsername" placeholder="Pilih username (min. 3 karakter)" autocomplete="username">
-            </div>
-            <div class="form-group">
-                <label for="registerPassword">Buat Password</label>
-                <input type="password" id="registerPassword" placeholder="Buat password (min. 6 karakter)" autocomplete="new-password">
-            </div>
-            <button class="btn btn-primary" id="registerButton" onclick="register()">
-                <span>Daftar</span>
-            </button>
-            <div class="toggle-text">
-                Sudah punya akun? <span class="toggle-link" onclick="showLogin()">Masuk di sini</span>
-            </div>
-        </div>
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator" onclick="scrollToFeatures()">
+        <span>⬇️</span>
+        <span>Geser untuk info lebih lanjut</span>
     </div>
 
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h2 class="section-title">✨ Fitur Unggulan</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>✨ Elaina si AI Teman Ngobrol</h3>
+                <p>Elaina bukan sekadar AI biasa~ Dia ngerti maksudmu, nyambung diajak ngobrol, dan kadang terasa kayak punya teman perjalanan sendiri.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3>🎶 Musik? Tinggal Play~</h3>
+                <p>Lagi pengen santai? Dengerin lagu favorit sambil ngobrol sama Elaina. Rasanya kayak lagi jalan-jalan ditemani musik dan seseorang yang selalu ada.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📎</div>
+                <h3>📚 Kirim Apa Aja, Santai~</h3>
+                <p>Mau kirim gambar, video, suara, atau dokumen? Lempar aja ke Elaina, dia bakal bantu ngertiin semuanya tanpa ribet.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎤</div>
+                <h3>🎙️ Ngomong Aja, Nggak Usah Ngetik</h3>
+                <p>Capek ngetik? Yaudah ngomong aja. Elaina dengerin kok, cepet dan langsung ngerti.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌙</div>
+                <h3>🌌 Mode Malam yang Adem</h3>
+                <p>Dipakai malem-malem juga enak. Nggak bikin mata lu teriak minta tolong.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>🛡️ Aman, Nggak Usah Parno</h3>
+                <p>Data lu aman. Serius. Nggak bakal bocor ke mana-mana kayak gosip tetangga.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Aktif Setiap Saat</div>
+            </div>
+            <div>
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Pertanyaan Terjawab</div>
+            </div>
+            <div>
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Format File Didukung</div>
+            </div>
+            <div>
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Uptime</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section class="login-wrapper" id="loginSection">
+        <div class="login-container">
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <div class="logo-text">Elaina AI</div>
+            </div>
+
+            <div id="errorMessage" class="message error-message hidden"></div>
+            <div id="successMessage" class="message success-message hidden"></div>
+            <div id="warningMessage" class="message warning-message hidden"></div>
+
+            <!-- Login Form -->
+            <div id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" placeholder="Masukkan username Anda" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Masukkan password Anda" autocomplete="current-password">
+                </div>
+                <button class="btn btn-primary" id="loginButton" onclick="login()">
+                    <span>Masuk</span>
+                </button>
+                <div class="toggle-text">
+                    Belum punya akun? <span class="toggle-link" onclick="showRegister()">Daftar di sini</span>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="hidden">
+                <div class="form-group">
+                    <label for="registerUsername">Buat Username</label>
+                    <input type="text" id="registerUsername" placeholder="Pilih username (min. 3 karakter)" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Buat Password</label>
+                    <input type="password" id="registerPassword" placeholder="Buat password (min. 6 karakter)" autocomplete="new-password">
+                </div>
+                <button class="btn btn-primary" id="registerButton" onclick="register()">
+                    <span>Daftar</span>
+                </button>
+                <div class="toggle-text">
+                    Sudah punya akun? <span class="toggle-link" onclick="showLogin()">Masuk di sini</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Elaina AI Assistant | Dibuat dengan ❤️ untuk pengalaman AI terbaik</p>
+    </footer>
+
     <script>
-        // Session management
         let currentSessionId = localStorage.getItem('sessionId');
         
-        // Check if user is already logged in
         checkAuthStatus();
         checkDatabaseStatus();
 
@@ -376,46 +633,37 @@
             localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
         });
 
-        // Load saved theme
         if (localStorage.getItem('darkMode') === 'true') {
             document.body.classList.add('dark-mode');
             document.getElementById('themeToggle').textContent = '☀️';
         }
 
+        function scrollToFeatures() {
+            document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToLogin() {
+            document.getElementById('loginSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
         function showMessage(elementId, message, isError = true) {
             const element = document.getElementById(elementId);
             element.textContent = message;
-            if (isError) {
-                element.className = 'message error-message';
-            } else {
-                element.className = 'message success-message';
-            }
+            element.className = isError ? 'message error-message' : 'message success-message';
             element.classList.remove('hidden');
-            
-            setTimeout(() => {
-                element.classList.add('hidden');
-            }, 5000);
-        }
-
-        function showWarning(message) {
-            const element = document.getElementById('warningMessage');
-            element.textContent = message;
-            element.className = 'message warning-message';
-            element.classList.remove('hidden');
+            setTimeout(() => element.classList.add('hidden'), 5000);
         }
 
         function showRegister() {
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('registerForm').classList.remove('hidden');
             clearMessages();
-            document.getElementById('registerUsername').focus();
         }
 
         function showLogin() {
             document.getElementById('registerForm').classList.add('hidden');
             document.getElementById('loginForm').classList.remove('hidden');
             clearMessages();
-            document.getElementById('loginUsername').focus();
         }
 
         function clearMessages() {
@@ -440,25 +688,23 @@
             try {
                 const response = await fetch('/api/db-status');
                 const data = await response.json();
-                
                 if (!data.database) {
-                    showWarning('⚠️ Database tidak terhubung. Mode session-based aktif.');
+                    const warning = document.getElementById('warningMessage');
+                    warning.textContent = '⚠️ Database tidak terhubung. Mode session-based aktif.';
+                    warning.className = 'message warning-message';
+                    warning.classList.remove('hidden');
                 }
             } catch (error) {
                 console.error('Database status check error:', error);
-                showWarning('⚠️ Tidak dapat terhubung ke server.');
             }
         }
 
         async function checkAuthStatus() {
             try {
                 const response = await fetch('/api/auth/status', {
-                    headers: {
-                        'Authorization': `Bearer ${currentSessionId}`
-                    }
+                    headers: { 'Authorization': `Bearer ${currentSessionId}` }
                 });
                 const data = await response.json();
-                
                 if (data.isAuthenticated) {
                     window.location.href = '/chat.html';
                 }
@@ -482,31 +728,24 @@
             try {
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    // Save session ID to localStorage
                     localStorage.setItem('sessionId', data.sessionId);
                     localStorage.setItem('username', data.username);
                     localStorage.setItem('isDeveloper', data.isDeveloper);
                     currentSessionId = data.sessionId;
-                    
                     showMessage('successMessage', data.message, false);
-                    setTimeout(() => {
-                        window.location.href = '/chat.html';
-                    }, 1000);
+                    setTimeout(() => window.location.href = '/chat.html', 1000);
                 } else {
                     showMessage('errorMessage', data.error);
                 }
             } catch (error) {
                 showMessage('errorMessage', 'Terjadi kesalahan koneksi. Periksa internet Anda.');
-                console.error('Login error:', error);
             } finally {
                 setLoading(loginButton, false);
             }
@@ -521,12 +760,10 @@
                 showMessage('errorMessage', 'Username dan password harus diisi');
                 return;
             }
-
             if (username.length < 3) {
                 showMessage('errorMessage', 'Username minimal 3 karakter');
                 return;
             }
-
             if (password.length < 6) {
                 showMessage('errorMessage', 'Password minimal 6 karakter');
                 return;
@@ -537,37 +774,29 @@
             try {
                 const response = await fetch('/api/auth/register', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    // Save session ID to localStorage
                     localStorage.setItem('sessionId', data.sessionId);
                     localStorage.setItem('username', data.username);
                     localStorage.setItem('isDeveloper', data.isDeveloper);
                     currentSessionId = data.sessionId;
-                    
                     showMessage('successMessage', data.message, false);
-                    setTimeout(() => {
-                        window.location.href = '/chat.html';
-                    }, 1000);
+                    setTimeout(() => window.location.href = '/chat.html', 1000);
                 } else {
                     showMessage('errorMessage', data.error);
                 }
             } catch (error) {
                 showMessage('errorMessage', 'Terjadi kesalahan koneksi. Periksa internet Anda.');
-                console.error('Register error:', error);
             } finally {
                 setLoading(registerButton, false);
             }
         }
 
-        // Allow form submission with Enter key
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 if (!document.getElementById('loginForm').classList.contains('hidden')) {
@@ -577,9 +806,6 @@
                 }
             }
         });
-
-        // Auto-focus on username field
-        document.getElementById('loginUsername').focus();
     </script>
 </body>
 </html>

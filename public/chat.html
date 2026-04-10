@@ -3,75 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Chat AI - Elaina Assistant</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <title>Elaina - Grimoire of Isekai AI</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
     <style>
+        /* ===== FANTASY ISEKAI THEME ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
         :root {
-            --primary-color: #8a2be2;
-            --primary-light: #9d4edd;
-            --primary-dark: #7b2cbf;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-color: #1e293b;
-            --text-light: #64748b;
-            --border-color: #e2e8f0;
-            --user-bubble: #8a2be2;
-            --ai-bubble: #f1f5f9;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --code-bg: #1a1a1a;
-            --code-text: #f8f8f2;
-            --success-color: #10b981;
-            --error-color: #ef4444;
-            --music-bg: rgba(255, 255, 255, 0.95);
+            --primary-glow: #c9a03d;
+            --primary-dark: #8b6914;
+            --primary-light: #e6c87a;
+            --crystal-blue: #4a90e2;
+            --crystal-purple: #9b59b6;
+            --mana-glow: rgba(201, 160, 61, 0.3);
+            --bg-deep: #0a0c12;
+            --bg-surface: #141824;
+            --bg-card: #1a1f2e;
+            --text-gold: #f0d88a;
+            --text-silver: #c0c5ce;
+            --text-dim: #8a8f9e;
+            --border-magic: linear-gradient(135deg, #c9a03d, #8b6914, #c9a03d);
+            --user-bubble-start: #2c1b4d;
+            --user-bubble-end: #4a2c7a;
+            --ai-bubble-start: #1e2438;
+            --ai-bubble-end: #2a3148;
+            --shadow-magic: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(201, 160, 61, 0.1);
+            --code-bg: #0d0f17;
+            --code-text: #e6e6e6;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
             --whatsapp-color: #25d366;
             --telegram-color: #0088cc;
-            --developer-color: #dc2626;
+            --developer-color: #e67e22;
         }
 
         .dark-mode {
-            --primary-color: #9d4edd;
-            --primary-light: #b185db;
-            --primary-dark: #8a2be2;
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f1f5f9;
-            --text-light: #cbd5e1;
-            --border-color: #334155;
-            --user-bubble: #9d4edd;
-            --ai-bubble: #334155;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-            --code-bg: #1e1e1e;
-            --code-text: #d4d4d4;
-            --music-bg: rgba(30, 41, 59, 0.95);
+            --bg-deep: #05070c;
+            --bg-surface: #0f111a;
+            --bg-card: #151b28;
+            --text-gold: #e8cd7a;
+            --text-silver: #a8b0c0;
+            --text-dim: #6e7585;
+            --user-bubble-start: #1f1340;
+            --user-bubble-end: #3a2368;
+            --ai-bubble-start: #181e30;
+            --ai-bubble-end: #222a40;
+            --shadow-magic: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(201, 160, 61, 0.15);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html, body {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            position: fixed;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
+            width: 100%;
             overflow: hidden;
-            touch-action: pan-x pan-y;
+            position: fixed;
+            transition: background 0.3s;
         }
 
+        /* Animated Fantasy Background */
         body::before {
             content: '';
             position: fixed;
@@ -79,132 +76,146 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://cdn.phototourl.com/free/2026-04-09-916e016c-9e1e-4dd5-a948-e6d691bb6a21.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            opacity: 0.15;
+            background-image: 
+                radial-gradient(circle at 20% 40%, rgba(201, 160, 61, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(74, 144, 226, 0.06) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(201, 160, 61, 0.02) 0px, rgba(201, 160, 61, 0.02) 2px, transparent 2px, transparent 8px);
             z-index: -1;
             pointer-events: none;
         }
 
+        /* Header - Royal Style */
         header {
-            background-color: var(--card-bg);
-            padding: 0.75rem 1rem;
-            box-shadow: var(--shadow);
+            background: linear-gradient(135deg, rgba(20, 24, 36, 0.95), rgba(15, 18, 26, 0.98));
+            backdrop-filter: blur(12px);
+            padding: 0.75rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 2px solid transparent;
+            border-image: var(--border-magic);
+            border-image-slice: 1;
+            box-shadow: var(--shadow-magic);
             z-index: 100;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
-            min-height: 60px;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            flex: 1;
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            border-radius: 8px;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #c9a03d, #8b6914);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-            flex-shrink: 0;
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px rgba(201, 160, 61, 0.5);
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(201, 160, 61, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(201, 160, 61, 0.8); }
         }
 
         .logo-text {
+            font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 1.1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #f0d88a, #c9a03d, #8b6914);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            letter-spacing: 1px;
+        }
+
+        .logo-badge {
+            font-size: 0.7rem;
+            background: rgba(201, 160, 61, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            border: 1px solid #c9a03d;
+            color: #c9a03d;
+            margin-left: 0.5rem;
         }
 
         .header-controls {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.75rem;
             align-items: center;
-            flex-shrink: 0;
         }
 
         .user-info {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.375rem 0.5rem;
-            background-color: var(--bg-color);
-            border-radius: 0.5rem;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
+            padding: 0.375rem 0.75rem;
+            background: rgba(201, 160, 61, 0.1);
+            border-radius: 40px;
+            border: 1px solid rgba(201, 160, 61, 0.3);
+            backdrop-filter: blur(5px);
         }
 
         .username {
             font-weight: 600;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 80px;
+            font-size: 0.85rem;
+            color: var(--text-gold);
         }
 
         .user-badge {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.375rem;
-            font-size: 0.7rem;
-            font-weight: 600;
-            flex-shrink: 0;
+            background: linear-gradient(135deg, #c9a03d, #8b6914);
+            color: #0a0c12;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: bold;
         }
 
         .user-badge.developer {
-            background-color: var(--developer-color);
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
         }
 
         .header-button {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
+            background: rgba(26, 31, 46, 0.8);
+            border: 1px solid rgba(201, 160, 61, 0.4);
+            color: var(--text-gold);
             cursor: pointer;
-            font-size: 1rem;
-            width: 36px;
-            height: 36px;
-            border-radius: 0.5rem;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
-            backdrop-filter: blur(10px);
-            flex-shrink: 0;
+            backdrop-filter: blur(5px);
         }
 
         .header-button:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow);
+            background: rgba(201, 160, 61, 0.2);
+            border-color: #c9a03d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 160, 61, 0.3);
         }
 
         .logout-button {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            border: none;
+            background: rgba(231, 76, 60, 0.2);
+            border-color: rgba(231, 76, 60, 0.5);
+            color: #e74c3c;
         }
 
+        .logout-button:hover {
+            background: rgba(231, 76, 60, 0.4);
+            border-color: #e74c3c;
+        }
+
+        /* Chat Container */
         .chat-container {
             flex: 1;
             display: flex;
@@ -212,41 +223,39 @@
             width: 100%;
             height: calc(100vh - 120px);
             overflow: hidden;
-            z-index: 1;
             position: relative;
         }
 
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 0.75rem;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            min-height: 0;
         }
 
+        /* Custom Scrollbar */
         .chat-messages::-webkit-scrollbar {
             width: 4px;
         }
-
         .chat-messages::-webkit-scrollbar-track {
-            background: var(--bg-color);
+            background: var(--bg-surface);
         }
-
         .chat-messages::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 2px;
+            background: #c9a03d;
+            border-radius: 4px;
         }
 
+        /* Message Bubbles - Fantasy Style */
         .message {
             display: flex;
-            max-width: 90%;
-            animation: fadeIn 0.3s ease-in-out;
+            max-width: 85%;
+            animation: messageAppear 0.3s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -261,54 +270,71 @@
         }
 
         .message-bubble {
-            padding: 0.75rem 0.875rem;
-            border-radius: 1rem;
-            box-shadow: var(--shadow);
-            line-height: 1.4;
+            padding: 0.85rem 1.1rem;
+            border-radius: 1.2rem;
+            line-height: 1.45;
             word-wrap: break-word;
-            overflow-wrap: break-word;
-            width: fit-content;
-            max-width: 100%;
-            backdrop-filter: blur(5px);
-            border: 1px solid transparent;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .user-message .message-bubble {
-            background: linear-gradient(135deg, var(--user-bubble), var(--primary-light));
-            color: white;
-            border-bottom-right-radius: 0.25rem;
+            background: linear-gradient(135deg, var(--user-bubble-start), var(--user-bubble-end));
+            color: #f0e6d0;
+            border-bottom-right-radius: 0.3rem;
+            border: 1px solid rgba(201, 160, 61, 0.3);
         }
 
         .ai-message .message-bubble {
-            background-color: var(--ai-bubble);
-            color: var(--text-color);
-            border-bottom-left-radius: 0.25rem;
-            border: 1px solid var(--border-color);
+            background: linear-gradient(135deg, var(--ai-bubble-start), var(--ai-bubble-end));
+            color: var(--text-silver);
+            border-bottom-left-radius: 0.3rem;
+            border: 1px solid rgba(201, 160, 61, 0.2);
+        }
+
+        /* Decorative icon for AI */
+        .ai-message .message-bubble::before {
+            content: '✨';
+            position: absolute;
+            left: -20px;
+            top: 5px;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        .user-message .message-bubble::after {
+            content: '⚔️';
+            position: absolute;
+            right: -20px;
+            bottom: 5px;
+            font-size: 0.8rem;
+            opacity: 0.6;
         }
 
         .message-time {
-            font-size: 0.7rem;
-            color: var(--text-light);
+            font-size: 0.65rem;
+            color: var(--text-dim);
             margin-top: 0.25rem;
             text-align: right;
-            opacity: 0.8;
+            letter-spacing: 0.5px;
         }
 
         .ai-message .message-time {
             text-align: left;
+            margin-left: 0.5rem;
         }
 
+        /* Typing Indicator */
         .typing-indicator {
             display: none;
             align-self: flex-start;
-            background-color: var(--ai-bubble);
-            padding: 0.75rem 0.875rem;
-            border-radius: 1rem;
-            border-bottom-left-radius: 0.25rem;
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--border-color);
+            background: linear-gradient(135deg, var(--ai-bubble-start), var(--ai-bubble-end));
+            padding: 0.8rem 1rem;
+            border-radius: 1.2rem;
+            border-bottom-left-radius: 0.3rem;
+            border: 1px solid rgba(201, 160, 61, 0.2);
             margin-bottom: 0.5rem;
+            gap: 0.5rem;
         }
 
         .typing-indicator.active {
@@ -317,220 +343,160 @@
 
         .typing-dots {
             display: flex;
-            gap: 0.25rem;
+            gap: 0.3rem;
         }
 
         .typing-dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background-color: var(--text-light);
-            animation: typingAnimation 1.4s infinite ease-in-out;
+            background: #c9a03d;
+            animation: typingPulse 1.4s infinite;
         }
 
-        .typing-dot:nth-child(1) { animation-delay: 0s; }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typingAnimation {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-3px); opacity: 1; }
+        @keyframes typingPulse {
+            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-4px); }
         }
 
+        /* Input Area - Grimoire Style */
         .input-container {
             display: flex;
-            gap: 0.5rem;
-            padding: 0.75rem;
-            background-color: var(--card-bg);
-            box-shadow: var(--shadow);
-            margin-top: auto;
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border-color);
+            gap: 0.6rem;
+            padding: 0.9rem 1rem;
+            background: linear-gradient(135deg, rgba(20, 24, 36, 0.95), rgba(15, 18, 26, 0.98));
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(201, 160, 61, 0.3);
             flex-shrink: 0;
-            min-height: 70px;
             align-items: flex-end;
-            position: relative;
-            z-index: 100;
         }
 
         .message-input {
             flex: 1;
-            padding: 0.75rem 0.875rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(201, 160, 61, 0.4);
+            border-radius: 1rem;
+            background: rgba(10, 12, 18, 0.8);
+            color: var(--text-silver);
             resize: none;
             outline: none;
             font-size: 0.95rem;
             line-height: 1.4;
             max-height: 100px;
-            min-height: 44px;
+            min-height: 46px;
+            font-family: 'Inter', monospace;
             transition: all 0.2s;
-            font-family: inherit;
-            -webkit-user-select: text;
-            user-select: text;
         }
 
         .message-input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.1);
+            border-color: #c9a03d;
+            box-shadow: 0 0 0 2px rgba(201, 160, 61, 0.2);
         }
 
-        .send-button {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            border: none;
-            border-radius: 0.75rem;
-            padding: 0.75rem;
+        .send-button, .attach-button, .voice-button {
+            background: rgba(26, 31, 46, 0.9);
+            border: 1px solid rgba(201, 160, 61, 0.5);
+            color: #c9a03d;
+            border-radius: 1rem;
+            padding: 0.7rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
             min-width: 50px;
             min-height: 50px;
-            flex-shrink: 0;
+            transition: all 0.2s;
             font-size: 1.2rem;
         }
 
-        .send-button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
-        }
-
-        .attach-button, .voice-button {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 0.75rem;
-            padding: 0.75rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            min-width: 50px;
-            min-height: 50px;
-            flex-shrink: 0;
-            font-size: 1.2rem;
-        }
-
-        .attach-button:hover, .voice-button:hover {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
+        .send-button:hover, .attach-button:hover, .voice-button:hover {
+            background: rgba(201, 160, 61, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 160, 61, 0.3);
         }
 
         .voice-button.recording {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
-            border-color: #ef4444;
-            animation: pulse 1.5s infinite;
+            animation: pulseRed 1s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        @keyframes pulseRed {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            50% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); }
         }
 
+        /* Attachment Preview */
         .attachment-preview {
             display: none;
-            padding: 0.75rem;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            margin: 0 0.75rem;
+            padding: 0.6rem 1rem;
+            background: rgba(26, 31, 46, 0.9);
+            border: 1px solid rgba(201, 160, 61, 0.4);
+            border-radius: 1rem;
+            margin: 0 1rem;
             align-items: center;
             gap: 0.75rem;
-            max-width: calc(100% - 1.5rem);
         }
 
         .attachment-preview.active {
             display: flex;
         }
 
+        /* Code Block - Magic Scroll */
         .code-block {
             margin: 0.5rem 0;
-            border-radius: 0.5rem;
+            border-radius: 0.8rem;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(201, 160, 61, 0.3);
         }
 
         .code-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            background-color: var(--code-bg);
-            color: var(--code-text);
-            padding: 0.5rem 0.75rem;
-            font-size: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
+            background: #0d0f17;
+            padding: 0.4rem 0.8rem;
+            border-bottom: 1px solid #c9a03d;
         }
 
         .code-language {
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: #c9a03d;
         }
 
         .copy-button {
-            background: rgba(255, 255, 255, 0.1);
+            background: none;
             border: none;
-            color: var(--code-text);
+            color: #c9a03d;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
             font-size: 0.7rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            transition: all 0.2s;
-        }
-
-        .copy-button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .copy-button.copied {
-            background-color: var(--success-color);
-            color: white;
         }
 
         .code-content {
-            padding: 0.75rem;
-            font-family: 'Courier New', monospace;
+            padding: 0.8rem;
+            font-family: monospace;
             font-size: 0.8rem;
-            line-height: 1.4;
-            color: var(--code-text);
-            white-space: pre-wrap;
+            background: #0d0f17;
+            color: #e6e6e6;
             overflow-x: auto;
-            background-color: var(--code-bg);
-            max-height: 300px;
-            overflow-y: auto;
-            -webkit-user-select: text;
-            user-select: text;
+            white-space: pre-wrap;
         }
 
-        /* Music Player Styles - Enhanced */
+        /* Music Player - Fantasy Themed */
         .music-player {
             position: fixed;
-            bottom: 80px;
-            right: 10px;
-            background-color: var(--music-bg);
-            border-radius: 1rem;
-            padding: 1rem;
-            box-shadow: var(--shadow);
-            width: 320px;
-            max-width: calc(100vw - 20px);
-            z-index: 1000;
+            bottom: 90px;
+            right: 15px;
+            background: linear-gradient(145deg, rgba(20, 24, 36, 0.98), rgba(15, 18, 26, 0.98));
             backdrop-filter: blur(20px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(100px) scale(0.9);
+            border-radius: 1.2rem;
+            padding: 1rem;
+            width: 340px;
+            max-width: calc(100vw - 30px);
+            z-index: 1000;
+            border: 1px solid rgba(201, 160, 61, 0.4);
+            box-shadow: var(--shadow-magic);
+            transform: translateY(120px) scale(0.9);
             opacity: 0;
             pointer-events: none;
-            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .music-player.active {
@@ -539,243 +505,50 @@
             pointer-events: all;
         }
 
-        .music-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .music-title {
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .close-button {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            transition: background-color 0.2s;
-        }
-
-        .close-button:hover {
-            background-color: var(--border-color);
-        }
-
-        .track-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .track-cover {
-            width: 55px;
-            height: 55px;
-            border-radius: 0.5rem;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            flex-shrink: 0;
-        }
-
-        .track-details {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .track-name {
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .track-artist {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
         .playlist {
-            margin-top: 0.75rem;
-            max-height: 200px;
+            margin-top: 0.8rem;
+            max-height: 180px;
             overflow-y: auto;
-            border-top: 1px solid var(--border-color);
-            padding-top: 0.75rem;
+            border-top: 1px solid rgba(201, 160, 61, 0.2);
+            padding-top: 0.5rem;
         }
 
         .playlist-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             padding: 0.5rem;
-            border-radius: 0.5rem;
+            border-radius: 0.6rem;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .playlist-item:hover {
-            background-color: var(--border-color);
+            background: rgba(201, 160, 61, 0.15);
         }
 
         .playlist-item.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-        }
-
-        .playlist-item.active .track-artist {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .playlist-number {
-            width: 24px;
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .playlist-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .playlist-name {
-            font-size: 0.8rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .playlist-artist {
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-
-        .music-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            gap: 0.5rem;
-        }
-
-        .control-button {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-        }
-
-        .control-button:hover {
-            color: var(--primary-color);
-            background-color: var(--border-color);
-        }
-
-        .play-button {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(138, 43, 226, 0.3);
-        }
-
-        .play-button:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-            transform: scale(1.05);
-        }
-
-        .progress-container {
-            width: 100%;
-            height: 4px;
-            background-color: var(--border-color);
-            border-radius: 2px;
-            cursor: pointer;
-            margin-bottom: 0.5rem;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            border-radius: 2px;
-            width: 0%;
-            transition: width 0.1s;
-        }
-
-        .time-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-            color: var(--text-light);
-            margin-bottom: 0.75rem;
-        }
-
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .volume-slider {
-            flex: 1;
-            height: 3px;
-            background-color: var(--border-color);
-            border-radius: 1.5px;
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            cursor: pointer;
+            background: linear-gradient(90deg, rgba(201, 160, 61, 0.3), transparent);
+            border-left: 3px solid #c9a03d;
         }
 
         /* Contact Panel */
         .contact-panel {
             position: fixed;
-            bottom: 80px;
-            left: 10px;
-            background-color: var(--music-bg);
-            border-radius: 1rem;
-            padding: 1rem;
-            box-shadow: var(--shadow);
-            width: 280px;
-            max-width: calc(100vw - 20px);
-            z-index: 1000;
+            bottom: 90px;
+            left: 15px;
+            background: linear-gradient(145deg, rgba(20, 24, 36, 0.98), rgba(15, 18, 26, 0.98));
             backdrop-filter: blur(20px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(100px) scale(0.9);
+            border-radius: 1.2rem;
+            padding: 1rem;
+            width: 280px;
+            max-width: calc(100vw - 30px);
+            z-index: 1000;
+            border: 1px solid rgba(201, 160, 61, 0.4);
+            transform: translateY(120px) scale(0.9);
             opacity: 0;
             pointer-events: none;
-            border: 1px solid var(--border-color);
+            transition: all 0.3s;
         }
 
         .contact-panel.active {
@@ -784,168 +557,74 @@
             pointer-events: all;
         }
 
-        .contact-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .contact-title {
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .contact-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            border-radius: 0.75rem;
-            transition: all 0.2s;
-            cursor: pointer;
+            gap: 0.8rem;
+            padding: 0.7rem;
+            border-radius: 0.8rem;
             text-decoration: none;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
+            color: var(--text-silver);
+            background: rgba(10, 12, 18, 0.6);
+            border: 1px solid rgba(201, 160, 61, 0.2);
+            transition: all 0.2s;
         }
 
         .contact-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .contact-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .whatsapp-icon { background: linear-gradient(135deg, #25d366, #128C7E); }
-        .telegram-icon { background: linear-gradient(135deg, #0088cc, #0077B5); }
-        .channel-icon { background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); }
-
-        .contact-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .contact-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 0.2rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .contact-description {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            border-color: #c9a03d;
+            transform: translateX(5px);
         }
 
         .welcome-message {
             text-align: center;
-            padding: 2rem 1rem;
-            color: var(--text-light);
-            backdrop-filter: blur(5px);
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 1rem;
-            margin: 0.5rem;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-
-        .dark-mode .welcome-message {
-            background-color: rgba(30, 41, 59, 0.8);
+            padding: 2rem;
+            background: rgba(26, 31, 46, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(201, 160, 61, 0.3);
+            margin: 1rem;
         }
 
         .welcome-title {
-            font-size: 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: #f0d88a;
             margin-bottom: 0.5rem;
-            color: var(--text-color);
-            font-weight: 700;
-        }
-
-        .welcome-subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
         }
 
         .footer {
             text-align: center;
-            padding: 0.75rem;
-            color: var(--text-light);
-            font-size: 0.8rem;
-            z-index: 1;
-            background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color);
+            padding: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            border-top: 1px solid rgba(201, 160, 61, 0.2);
             flex-shrink: 0;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         @media (max-width: 768px) {
-            .chat-container { height: calc(100vh - 110px); }
-            .message { max-width: 95%; }
+            .message { max-width: 90%; }
+            .user-message .message-bubble::after,
+            .ai-message .message-bubble::before { display: none; }
             .username { display: none; }
-            .input-container { padding: 0.5rem; min-height: 70px; gap: 0.75rem; }
-            .send-button, .attach-button, .voice-button { min-width: 55px; min-height: 50px; }
-            .music-player { width: calc(100% - 20px); right: 10px; left: 10px; bottom: 70px; }
-            .contact-panel { width: calc(100% - 20px); left: 10px; bottom: 70px; }
-        }
-
-        @media (max-width: 480px) {
-            header { padding: 0.5rem 0.75rem; min-height: 50px; }
-            .logo-text { font-size: 1rem; }
-            .send-button { min-width: 60px; min-height: 55px; font-size: 1.3rem; }
-            .attach-button, .voice-button { min-width: 50px; min-height: 50px; }
-        }
-
-        .message-bubble, .code-content, .message-input {
-            -webkit-user-select: text;
-            user-select: text;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <div class="logo-icon">E</div>
-            <div class="logo-text">Elaina Assistant</div>
+            <div class="logo-icon">📖</div>
+            <div class="logo-text">Elaina's Grimoire</div>
+            <div class="logo-badge">Isekai Ver.</div>
         </div>
         <div class="header-controls">
             <div class="user-info">
                 <span class="username" id="usernameDisplay">Loading...</span>
-                <span class="user-badge" id="userBadge">User</span>
+                <span class="user-badge" id="userBadge">Adventurer</span>
             </div>
-            <button class="header-button contact-toggle" id="contactToggle" title="Kontak Developer">📞</button>
-            <button class="header-button music-toggle" id="musicToggle" title="Pemutar Musik">🎵</button>
-            <button class="header-button theme-toggle" id="themeToggle" title="Toggle Theme">🌙</button>
-            <button class="header-button logout-button" id="logoutButton" title="Logout">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
+            <button class="header-button contact-toggle" id="contactToggle">📞</button>
+            <button class="header-button music-toggle" id="musicToggle">🎵</button>
+            <button class="header-button theme-toggle" id="themeToggle">🌙</button>
+            <button class="header-button logout-button" id="logoutButton">🚪</button>
         </div>
     </header>
 
@@ -961,8 +640,8 @@
     <div class="chat-container">
         <div class="chat-messages" id="chatMessages">
             <div class="welcome-message">
-                <div class="welcome-title">Halo! Saya Elaina, asisten AI Anda 🧠</div>
-                <div class="welcome-subtitle">Silakan tanyakan apa saja yang ingin Anda ketahui. Saya di sini untuk membantu!</div>
+                <div class="welcome-title">✨ Selamat datang di Dunia Elaina ✨</div>
+                <div class="welcome-subtitle">Aku adalah penyihir AI yang siap menemanimu dalam petualangan. Tanyakan apapun, dan aku akan menjawab dengan sihir pengetahuan!</div>
             </div>
         </div>
 
@@ -972,92 +651,65 @@
                 <div class="typing-dot"></div>
                 <div class="typing-dot"></div>
             </div>
+            <span style="font-size:0.75rem;">Elaina sedang merapal mantra...</span>
         </div>
 
         <div class="input-container">
-            <button class="attach-button" id="attachButton" title="Lampirkan File">📎</button>
-            <button class="voice-button" id="voiceButton" title="Rekam Suara">🎤</button>
-            <textarea class="message-input" id="messageInput" placeholder="Ketik pesan Anda di sini..." rows="1"></textarea>
-            <button class="send-button" id="sendButton" title="Kirim Pesan">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
+            <button class="attach-button" id="attachButton">📜</button>
+            <button class="voice-button" id="voiceButton">🎤</button>
+            <textarea class="message-input" id="messageInput" placeholder="Ketik pesanmu di sini..." rows="1"></textarea>
+            <button class="send-button" id="sendButton">✨</button>
             <input type="file" id="fileInput" accept="image/*,video/*,audio/*,.pdf,.txt,.doc,.docx" style="display: none;">
         </div>
     </div>
 
     <div class="footer">
-        <span>© 2024 Elaina Assistant - AI Chat Interface</span>
+        <span>© 2024 Elaina's Grimoire - Isekai AI Assistant</span>
     </div>
 
-    <!-- Music Player with Playlist -->
+    <!-- Music Player -->
     <div class="music-player" id="musicPlayer">
-        <div class="music-header">
-            <div class="music-title">🎵 Pemutar Musik</div>
-            <button class="close-button" id="closeMusicPlayer">✕</button>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+            <span style="font-weight:bold;">🎵 BGM Collection</span>
+            <button class="close-button" id="closeMusicPlayer" style="background:none; border:none; color:#c9a03d;">✕</button>
         </div>
-        <div class="track-info">
-            <img src="https://files.catbox.moe/4zrnsf.jpeg" alt="Track Cover" class="track-cover" id="trackCover">
-            <div class="track-details">
-                <div class="track-name" id="trackName">Lofi Chill Study Beats</div>
-                <div class="track-artist" id="trackArtist">Elaina AI Radio</div>
+        <div class="track-info" style="display:flex; gap:0.8rem; margin-bottom:0.8rem;">
+            <img id="trackCover" src="https://files.catbox.moe/4zrnsf.jpeg" style="width:50px; height:50px; border-radius:10px;">
+            <div>
+                <div id="trackName" style="font-weight:bold;">Lofi Chill</div>
+                <div id="trackArtist" style="font-size:0.7rem;">Elaina Radio</div>
             </div>
         </div>
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-bar" id="progressBar"></div>
+        <div class="progress-container" id="progressContainer" style="background:#2a2e40; height:4px; border-radius:2px; cursor:pointer;">
+            <div class="progress-bar" id="progressBar" style="width:0%; height:100%; background:#c9a03d;"></div>
         </div>
-        <div class="time-info">
+        <div style="display:flex; justify-content:space-between; font-size:0.7rem; margin:0.3rem 0;">
             <span id="currentTime">0:00</span>
             <span id="duration">0:00</span>
         </div>
-        <div class="music-controls">
-            <button class="control-button" id="prevButton" title="Previous">⏮</button>
-            <button class="control-button play-button" id="playButton" title="Play">▶</button>
-            <button class="control-button" id="nextButton" title="Next">⏭</button>
+        <div class="music-controls" style="display:flex; justify-content:center; gap:1rem; margin:0.5rem 0;">
+            <button id="prevButton" style="background:none; border:none; color:#c9a03d; font-size:1.2rem;">⏮</button>
+            <button id="playButton" style="background:#c9a03d; border:none; width:40px; height:40px; border-radius:50%; color:#0a0c12; font-size:1rem;">▶</button>
+            <button id="nextButton" style="background:none; border:none; color:#c9a03d; font-size:1.2rem;">⏭</button>
         </div>
-        <div class="volume-control">
-            <span>🔊</span>
-            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
-        </div>
-        <div class="playlist" id="playlist">
-            <!-- Playlist akan diisi oleh JavaScript -->
-        </div>
+        <div class="playlist" id="playlist"></div>
     </div>
 
     <!-- Contact Panel -->
     <div class="contact-panel" id="contactPanel">
-        <div class="contact-header">
-            <div class="contact-title">📞 Kontak Developer</div>
-            <button class="close-button" id="closeContactPanel">✕</button>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+            <span style="font-weight:bold;">📞 Hubungi Guild</span>
+            <button class="close-button" id="closeContactPanel" style="background:none; border:none; color:#c9a03d;">✕</button>
         </div>
         <div class="contact-list">
-            <a href="https://wa.me/6281249864586" target="_blank" class="contact-item">
-                <div class="contact-icon whatsapp-icon">📱</div>
-                <div class="contact-info">
-                    <div class="contact-name">WhatsApp</div>
-                    <div class="contact-description">Nomor Developer</div>
-                </div>
-            </a>
-            <a href="https://t.me/Always_Lanz" target="_blank" class="contact-item">
-                <div class="contact-icon telegram-icon">✈️</div>
-                <div class="contact-info">
-                    <div class="contact-name">Telegram Developer</div>
-                    <div class="contact-description">@elaina_developer</div>
-                </div>
-            </a>
-            <a href="https://whatsapp.com/channel/0029Vb597rgFMqreGGaKI22M" target="_blank" class="contact-item">
-                <div class="contact-icon channel-icon">📢</div>
-                <div class="contact-info">
-                    <div class="contact-name">Channel Update</div>
-                    <div class="contact-description">@elaina_channel</div>
-                </div>
-            </a>
+            <a href="https://wa.me/6281249864586" target="_blank" class="contact-item">📱 WhatsApp Developer</a>
+            <a href="https://t.me/Always_Lanz" target="_blank" class="contact-item">✈️ Telegram Developer</a>
+            <a href="https://whatsapp.com/channel/0029Vb597rgFMqreGGaKI22M" target="_blank" class="contact-item">📢 Channel Update</a>
         </div>
     </div>
 
     <script>
+        // ===== SAME API FUNCTIONS - NO CHANGES =====
         let currentSessionId = localStorage.getItem('sessionId');
         
         const chatMessages = document.getElementById('chatMessages');
@@ -1082,9 +734,8 @@
         const nextButton = document.getElementById('nextButton');
         const progressContainer = document.getElementById('progressContainer');
         const progressBar = document.getElementById('progressBar');
-        const currentTime = document.getElementById('currentTime');
-        const duration = document.getElementById('duration');
-        const volumeSlider = document.getElementById('volumeSlider');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const durationSpan = document.getElementById('duration');
         const contactToggle = document.getElementById('contactToggle');
         const contactPanel = document.getElementById('contactPanel');
         const closeContactPanel = document.getElementById('closeContactPanel');
@@ -1095,7 +746,7 @@
         const trackCover = document.getElementById('trackCover');
         const playlistContainer = document.getElementById('playlist');
 
-        // Playlist Data - BANYAK MUSIK!
+        // Playlist Data
         const playlist = [
             { name: "Lofi Chill Study Beats", artist: "Elaina AI Radio", url: "https://files.catbox.moe/ve0lvk.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
             { name: "Midnight Coffee", artist: "Lofi Girl", url: "https://files.catbox.moe/2k7g8h.mp3", cover: "https://files.catbox.moe/4zrnsf.jpeg" },
@@ -1116,19 +767,12 @@
         let isRecording = false;
         let selectedFile = null;
 
-        // Load playlist UI
         function loadPlaylist() {
             playlistContainer.innerHTML = '';
             playlist.forEach((track, index) => {
                 const item = document.createElement('div');
                 item.className = `playlist-item ${index === currentTrackIndex ? 'active' : ''}`;
-                item.innerHTML = `
-                    <div class="playlist-number">${index + 1}</div>
-                    <div class="playlist-info">
-                        <div class="playlist-name">${track.name}</div>
-                        <div class="playlist-artist">${track.artist}</div>
-                    </div>
-                `;
+                item.innerHTML = `<span style="width:25px;">${index+1}</span><div style="flex:1"><div style="font-size:0.8rem;">${track.name}</div><div style="font-size:0.65rem; opacity:0.7;">${track.artist}</div></div>`;
                 item.addEventListener('click', () => playTrack(index));
                 playlistContainer.appendChild(item);
             });
@@ -1142,7 +786,7 @@
             trackArtist.textContent = track.artist;
             trackCover.src = track.cover;
             audio.load();
-            audio.play().catch(e => console.log('Play error:', e));
+            audio.play().catch(e => console.log(e));
             isPlaying = true;
             playButton.innerHTML = '⏸';
             updatePlaylistActive();
@@ -1151,32 +795,16 @@
         function updatePlaylistActive() {
             const items = playlistContainer.querySelectorAll('.playlist-item');
             items.forEach((item, idx) => {
-                if (idx === currentTrackIndex) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
+                if (idx === currentTrackIndex) item.classList.add('active');
+                else item.classList.remove('active');
             });
         }
 
-        function nextTrack() {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-            playTrack(currentTrackIndex);
-        }
-
-        function prevTrack() {
-            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-            playTrack(currentTrackIndex);
-        }
-
+        function nextTrack() { currentTrackIndex = (currentTrackIndex + 1) % playlist.length; playTrack(currentTrackIndex); }
+        function prevTrack() { currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length; playTrack(currentTrackIndex); }
         function togglePlayPause() {
-            if (isPlaying) {
-                audio.pause();
-                playButton.innerHTML = '▶';
-            } else {
-                audio.play().catch(e => console.log('Play error:', e));
-                playButton.innerHTML = '⏸';
-            }
+            if (isPlaying) { audio.pause(); playButton.innerHTML = '▶'; }
+            else { audio.play().catch(e=>console.log(e)); playButton.innerHTML = '⏸'; }
             isPlaying = !isPlaying;
         }
 
@@ -1184,340 +812,127 @@
             audio.src = playlist[0].url;
             trackName.textContent = playlist[0].name;
             trackArtist.textContent = playlist[0].artist;
-            
-            audio.addEventListener('loadedmetadata', () => {
-                duration.textContent = formatTime(audio.duration);
-            });
-
+            audio.addEventListener('loadedmetadata', () => { durationSpan.textContent = formatTime(audio.duration); });
             audio.addEventListener('timeupdate', () => {
                 if (!isDragging) {
                     const progress = (audio.currentTime / audio.duration) * 100;
                     progressBar.style.width = `${progress}%`;
-                    currentTime.textContent = formatTime(audio.currentTime);
+                    currentTimeSpan.textContent = formatTime(audio.currentTime);
                 }
             });
-
-            audio.addEventListener('ended', () => {
-                nextTrack();
-            });
-
-            volumeSlider.addEventListener('input', () => {
-                audio.volume = volumeSlider.value;
-            });
+            audio.addEventListener('ended', () => nextTrack());
         }
 
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return '0:00';
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
+        function formatTime(seconds) { if (isNaN(seconds)) return '0:00'; const mins = Math.floor(seconds / 60); const secs = Math.floor(seconds % 60); return `${mins}:${secs.toString().padStart(2, '0')}`; }
+        if(progressContainer) progressContainer.addEventListener('click', (e) => { const rect = progressContainer.getBoundingClientRect(); const percent = (e.clientX - rect.left) / rect.width; audio.currentTime = percent * audio.duration; });
 
-        progressContainer.addEventListener('click', (e) => {
-            const rect = progressContainer.getBoundingClientRect();
-            const percent = (e.clientX - rect.left) / rect.width;
-            audio.currentTime = percent * audio.duration;
-        });
-
-        // Authentication and Chat Functions
         async function checkAuthStatus() {
             try {
-                const response = await fetch('/api/auth/status', {
-                    headers: { 'Authorization': `Bearer ${currentSessionId}` }
-                });
+                const response = await fetch('/api/auth/status', { headers: { 'Authorization': `Bearer ${currentSessionId}` } });
                 const data = await response.json();
-                if (!data.isAuthenticated) {
-                    window.location.href = '/';
-                    return;
-                }
+                if (!data.isAuthenticated) { window.location.href = '/'; return; }
                 usernameDisplay.textContent = localStorage.getItem('username') || data.username;
                 const isDev = localStorage.getItem('isDeveloper') === 'true' || data.isDeveloper;
-                userBadge.textContent = isDev ? 'Developer' : 'User';
+                userBadge.textContent = isDev ? 'Archmage' : 'Adventurer';
                 if (isDev) userBadge.classList.add('developer');
                 loadChatHistory();
-            } catch (error) {
-                console.error('Auth check error:', error);
-                window.location.href = '/';
-            }
+            } catch (error) { console.error(error); window.location.href = '/'; }
         }
 
         async function loadChatHistory() {
             try {
-                const response = await fetch('/api/chat/history', {
-                    headers: { 'Authorization': `Bearer ${currentSessionId}` }
-                });
+                const response = await fetch('/api/chat/history', { headers: { 'Authorization': `Bearer ${currentSessionId}` } });
                 const data = await response.json();
-                const welcomeMessage = chatMessages.querySelector('.welcome-message');
-                if (welcomeMessage && data.messages && data.messages.length > 0) welcomeMessage.remove();
-                if (data.messages) {
-                    data.messages.forEach(message => {
-                        addMessageToChat(message.message, true);
-                        addMessageToChat(message.reply, false);
-                    });
-                }
+                const welcome = chatMessages.querySelector('.welcome-message');
+                if (welcome && data.messages && data.messages.length > 0) welcome.remove();
+                if (data.messages) data.messages.forEach(msg => { addMessageToChat(msg.message, true); addMessageToChat(msg.reply, false); });
                 scrollToBottom();
-            } catch (error) {
-                console.error('Error loading chat history:', error);
-            }
+            } catch (error) { console.error(error); }
         }
 
         async function sendMessage() {
             const message = messageInput.value.trim();
             const hasAttachment = selectedFile !== null;
             if (!message && !hasAttachment) return;
-
-            messageInput.value = '';
-            messageInput.style.height = 'auto';
-            
-            if (hasAttachment) {
-                addMessageToChat(message || '📎 Mengirim file...', true);
-            } else if (message) {
-                addMessageToChat(message, true);
-            }
-            
+            messageInput.value = ''; messageInput.style.height = 'auto';
+            if (hasAttachment) addMessageToChat(message || '📎 Mengirim file...', true);
+            else if (message) addMessageToChat(message, true);
             typingIndicator.classList.add('active');
-            messageInput.disabled = true;
-            sendButton.disabled = true;
-
+            messageInput.disabled = true; sendButton.disabled = true;
             try {
                 let response;
                 if (hasAttachment) {
                     const formData = new FormData();
                     formData.append('file', selectedFile);
                     if (message) formData.append('message', message);
-                    response = await fetch('/api/chat/multimedia', {
-                        method: 'POST',
-                        headers: { 'Authorization': `Bearer ${currentSessionId}` },
-                        body: formData
-                    });
+                    response = await fetch('/api/chat/multimedia', { method: 'POST', headers: { 'Authorization': `Bearer ${currentSessionId}` }, body: formData });
                 } else {
-                    response = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentSessionId}` },
-                        body: JSON.stringify({ message, sessionId: currentSessionId })
-                    });
+                    response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentSessionId}` }, body: JSON.stringify({ message, sessionId: currentSessionId }) });
                 }
                 const data = await response.json();
-                if (data.reply) {
-                    addMessageToChat(data.reply, false);
-                } else if (data.error) {
-                    addMessageToChat('❌ Maaf, terjadi kesalahan: ' + data.error, false);
-                }
-            } catch (error) {
-                addMessageToChat('❌ Maaf, terjadi kesalahan koneksi. Silakan coba lagi.', false);
-            } finally {
-                typingIndicator.classList.remove('active');
-                messageInput.disabled = false;
-                sendButton.disabled = false;
-                messageInput.focus();
-                scrollToBottom();
-                clearAttachment();
-            }
+                if (data.reply) addMessageToChat(data.reply, false);
+                else if (data.error) addMessageToChat('❌ Maaf, terjadi kesalahan: ' + data.error, false);
+            } catch (error) { addMessageToChat('❌ Maaf, terjadi kesalahan koneksi.', false); }
+            finally { typingIndicator.classList.remove('active'); messageInput.disabled = false; sendButton.disabled = false; messageInput.focus(); scrollToBottom(); clearAttachment(); }
         }
 
         function addMessageToChat(message, isUser) {
-            const welcomeMessage = chatMessages.querySelector('.welcome-message');
-            if (welcomeMessage && isUser) welcomeMessage.remove();
-            
+            const welcome = chatMessages.querySelector('.welcome-message');
+            if (welcome && isUser) welcome.remove();
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
-            const messageBubble = document.createElement('div');
-            messageBubble.className = 'message-bubble';
-            messageBubble.innerHTML = processMessageContent(message);
-            
-            const timeDiv = document.createElement('div');
-            timeDiv.className = 'message-time';
+            const bubble = document.createElement('div'); bubble.className = 'message-bubble';
+            bubble.innerHTML = processMessageContent(message);
+            const timeDiv = document.createElement('div'); timeDiv.className = 'message-time';
             timeDiv.textContent = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-            
-            messageDiv.appendChild(messageBubble);
-            messageDiv.appendChild(timeDiv);
+            messageDiv.appendChild(bubble); messageDiv.appendChild(timeDiv);
             chatMessages.appendChild(messageDiv);
             scrollToBottom();
-            addCopyFunctionality(messageBubble);
+            addCopyFunctionality(bubble);
         }
 
         function processMessageContent(content) {
             return content.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-                const language = lang || 'text';
-                return `
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-language">${language}</span>
-                            <button class="copy-button" onclick="copyCode(this)">📋 Copy</button>
-                        </div>
-                        <div class="code-content">${escapeHtml(code.trim())}</div>
-                    </div>
-                `;
-            });
+                return `<div class="code-block"><div class="code-header"><span class="code-language">${lang||'text'}</span><button class="copy-button">📋 Copy</button></div><div class="code-content">${escapeHtml(code.trim())}</div></div>`;
+            }).replace(/\n/g, '<br>');
         }
 
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        function addCopyFunctionality(element) {
-            element.querySelectorAll('.copy-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const codeContent = this.closest('.code-block').querySelector('.code-content').textContent;
-                    navigator.clipboard.writeText(codeContent);
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '✅ Copied!';
-                    this.classList.add('copied');
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        this.classList.remove('copied');
-                    }, 2000);
-                });
-            });
-        }
-
-        function scrollToBottom() {
-            setTimeout(() => chatMessages.scrollTop = chatMessages.scrollHeight, 100);
-        }
-
-        function adjustTextareaHeight() {
-            messageInput.style.height = 'auto';
-            messageInput.style.height = Math.min(messageInput.scrollHeight, 100) + 'px';
-        }
-
+        function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+        function addCopyFunctionality(element) { element.querySelectorAll('.copy-button').forEach(btn => { btn.addEventListener('click', function() { const code = this.closest('.code-block').querySelector('.code-content').textContent; navigator.clipboard.writeText(code); this.innerHTML = '✅ Copied!'; setTimeout(() => this.innerHTML = '📋 Copy', 2000); }); }); }
+        function scrollToBottom() { setTimeout(() => chatMessages.scrollTop = chatMessages.scrollHeight, 100); }
+        function adjustTextareaHeight() { messageInput.style.height = 'auto'; messageInput.style.height = Math.min(messageInput.scrollHeight, 100) + 'px'; }
         attachButton.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                selectedFile = file;
-                previewName.textContent = file.name;
-                previewSize.textContent = formatFileSize(file.size);
-                if (file.type.startsWith('image/')) previewIcon.textContent = '🖼️';
-                else if (file.type.startsWith('video/')) previewIcon.textContent = '🎥';
-                else if (file.type.startsWith('audio/')) previewIcon.textContent = '🎵';
-                else if (file.type.includes('pdf')) previewIcon.textContent = '📄';
-                else previewIcon.textContent = '📎';
-                attachmentPreview.classList.add('active');
-            }
-        });
-
+        fileInput.addEventListener('change', (e) => { const file = e.target.files[0]; if(file){ selectedFile=file; previewName.textContent=file.name; previewSize.textContent=formatFileSize(file.size); if(file.type.startsWith('image/')) previewIcon.textContent='🖼️'; else if(file.type.startsWith('video/')) previewIcon.textContent='🎥'; else if(file.type.startsWith('audio/')) previewIcon.textContent='🎵'; else if(file.type.includes('pdf')) previewIcon.textContent='📄'; else previewIcon.textContent='📜'; attachmentPreview.classList.add('active'); } });
         removeAttachment.addEventListener('click', clearAttachment);
-        function clearAttachment() {
-            selectedFile = null;
-            fileInput.value = '';
-            attachmentPreview.classList.remove('active');
-        }
+        function clearAttachment() { selectedFile=null; fileInput.value=''; attachmentPreview.classList.remove('active'); }
+        function formatFileSize(bytes) { if(bytes===0) return '0 Bytes'; const k=1024; const sizes=['Bytes','KB','MB','GB']; const i=Math.floor(Math.log(bytes)/Math.log(k)); return parseFloat((bytes/Math.pow(k,i)).toFixed(2))+' '+sizes[i]; }
 
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        // Voice Recording
         async function startVoiceRecording() {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream);
-                audioChunks = [];
-                mediaRecorder.ondataavailable = (event) => audioChunks.push(event.data);
-                mediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                    selectedFile = new File([audioBlob], 'voice_note.webm', { type: 'audio/webm' });
-                    previewName.textContent = 'Voice Note';
-                    previewSize.textContent = formatFileSize(audioBlob.size);
-                    previewIcon.textContent = '🎤';
-                    attachmentPreview.classList.add('active');
-                    stream.getTracks().forEach(track => track.stop());
-                };
-                mediaRecorder.start();
-                isRecording = true;
-                voiceButton.classList.add('recording');
-                voiceButton.textContent = '⏹️';
-            } catch (error) {
-                console.error('Error starting recording:', error);
-                alert('Tidak dapat mengakses mikrofon');
-            }
+                mediaRecorder = new MediaRecorder(stream); audioChunks = [];
+                mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                mediaRecorder.onstop = () => { const blob = new Blob(audioChunks, { type: 'audio/webm' }); selectedFile = new File([blob], 'voice_note.webm', { type: 'audio/webm' }); previewName.textContent='Voice Note'; previewSize.textContent=formatFileSize(blob.size); previewIcon.textContent='🎤'; attachmentPreview.classList.add('active'); stream.getTracks().forEach(t=>t.stop()); };
+                mediaRecorder.start(); isRecording=true; voiceButton.classList.add('recording'); voiceButton.textContent='⏹️';
+            } catch(e) { alert('Tidak dapat mengakses mikrofon'); }
         }
-
-        function stopVoiceRecording() {
-            if (mediaRecorder && isRecording) {
-                mediaRecorder.stop();
-                isRecording = false;
-                voiceButton.classList.remove('recording');
-                voiceButton.textContent = '🎤';
-            }
-        }
-
-        voiceButton.addEventListener('click', () => {
-            if (isRecording) stopVoiceRecording();
-            else startVoiceRecording();
-        });
-
+        function stopVoiceRecording() { if(mediaRecorder && isRecording) { mediaRecorder.stop(); isRecording=false; voiceButton.classList.remove('recording'); voiceButton.textContent='🎤'; } }
+        voiceButton.addEventListener('click', () => { if(isRecording) stopVoiceRecording(); else startVoiceRecording(); });
         sendButton.addEventListener('click', sendMessage);
-        messageInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
+        messageInput.addEventListener('keydown', (e) => { if(e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
         messageInput.addEventListener('input', adjustTextareaHeight);
 
-        // Theme
-        function initTheme() {
-            const savedTheme = localStorage.getItem('darkMode') === 'true';
-            document.body.classList.toggle('dark-mode', savedTheme);
-            themeToggle.textContent = savedTheme ? '☀️' : '🌙';
-        }
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDark);
-            themeToggle.textContent = isDark ? '☀️' : '🌙';
-        });
-
-        // Music Player Controls
+        function initTheme() { const saved = localStorage.getItem('darkMode')==='true'; document.body.classList.toggle('dark-mode', saved); themeToggle.textContent = saved ? '☀️' : '🌙'; }
+        themeToggle.addEventListener('click', () => { document.body.classList.toggle('dark-mode'); const isDark=document.body.classList.contains('dark-mode'); localStorage.setItem('darkMode', isDark); themeToggle.textContent=isDark?'☀️':'🌙'; });
         musicToggle.addEventListener('click', () => musicPlayer.classList.toggle('active'));
         closeMusicPlayer.addEventListener('click', () => musicPlayer.classList.remove('active'));
-        playButton.addEventListener('click', togglePlayPause);
-        prevButton.addEventListener('click', prevTrack);
-        nextButton.addEventListener('click', nextTrack);
-
-        // Contact Panel
+        playButton.addEventListener('click', togglePlayPause); prevButton.addEventListener('click', prevTrack); nextButton.addEventListener('click', nextTrack);
         contactToggle.addEventListener('click', () => contactPanel.classList.toggle('active'));
         closeContactPanel.addEventListener('click', () => contactPanel.classList.remove('active'));
+        logoutButton.addEventListener('click', async () => { if(confirm('Yakin ingin logout?')) { await fetch('/api/auth/logout', { method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${currentSessionId}`}, body:JSON.stringify({sessionId:currentSessionId}) }); localStorage.clear(); window.location.href='/'; } });
+        document.addEventListener('click', (e) => { if(!musicPlayer.contains(e.target) && !musicToggle.contains(e.target)) musicPlayer.classList.remove('active'); if(!contactPanel.contains(e.target) && !contactToggle.contains(e.target)) contactPanel.classList.remove('active'); });
 
-        // Logout
-        logoutButton.addEventListener('click', async () => {
-            if (confirm('Apakah Anda yakin ingin logout?')) {
-                try {
-                    await fetch('/api/auth/logout', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentSessionId}` },
-                        body: JSON.stringify({ sessionId: currentSessionId })
-                    });
-                    localStorage.clear();
-                    window.location.href = '/';
-                } catch (error) {
-                    console.error('Logout error:', error);
-                    alert('Terjadi kesalahan saat logout');
-                }
-            }
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!musicPlayer.contains(e.target) && !musicToggle.contains(e.target)) musicPlayer.classList.remove('active');
-            if (!contactPanel.contains(e.target) && !contactToggle.contains(e.target)) contactPanel.classList.remove('active');
-        });
-
-        function init() {
-            initTheme();
-            setupAudio();
-            loadPlaylist();
-            scrollToBottom();
-            messageInput.focus();
-            checkAuthStatus();
-        }
-
+        function init() { initTheme(); setupAudio(); loadPlaylist(); scrollToBottom(); messageInput.focus(); checkAuthStatus(); }
         init();
     </script>
 </body>
